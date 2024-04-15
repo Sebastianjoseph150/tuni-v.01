@@ -37,36 +37,32 @@ class Categories extends StatelessWidget {
             children: [
               SizedBox(height: screenHeight * .01),
               categoriesItems(
-                screenWidth: screenWidth,
-                screenHeight: screenHeight,
-                categoryName: 'All',
-                className: AllCategory(),
-                context: context
-              ),
+                  screenWidth: screenWidth,
+                  screenHeight: screenHeight,
+                  categoryName: 'All',
+                  className: AllCategory(),
+                  context: context),
               SizedBox(height: screenHeight * .015),
               categoriesItems(
                   screenWidth: screenWidth,
                   screenHeight: screenHeight,
                   categoryName: 'Men',
                   className: MenCategory(),
-                  context: context
-              ),
+                  context: context),
               SizedBox(height: screenHeight * .015),
               categoriesItems(
                   screenWidth: screenWidth,
                   screenHeight: screenHeight,
                   categoryName: 'Women',
                   className: WomenCategory(),
-                  context: context
-              ),
+                  context: context),
               SizedBox(height: screenHeight * .015),
               categoriesItems(
                   screenWidth: screenWidth,
                   screenHeight: screenHeight,
                   categoryName: 'Kids',
                   className: KidsCategory(),
-                  context: context
-              ),
+                  context: context),
             ],
           ),
         ),

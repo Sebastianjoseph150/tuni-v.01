@@ -18,7 +18,7 @@ class AllCategory extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           foregroundColor: Colors.black,
-          title: Text(
+          title: const Text(
             'All',
             style: TextStyle(letterSpacing: 3, fontSize: 20),
           ),
@@ -28,7 +28,7 @@ class AllCategory extends StatelessWidget {
           stream: firestore,
           builder: (context, snapshot) {
             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-              return SizedBox(
+              return const SizedBox(
                 height: 500,
                 child: Center(
                   child: Text("Currently this category not available"),
@@ -36,18 +36,18 @@ class AllCategory extends StatelessWidget {
               );
             }
             if (snapshot.hasError) {
-              return Center(
+              return const Center(
                 child: Text('Some Error Occurred'),
               );
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
             return GridView.builder(
-              padding: EdgeInsets.all(10),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              padding: const EdgeInsets.all(10),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2, childAspectRatio: .72),
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (context, index) {

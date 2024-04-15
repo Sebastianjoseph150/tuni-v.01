@@ -80,7 +80,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             MaterialPageRoute(
                               builder: (context) => BottomNavBarPage(),
                             ),
-                                (route) => false);
+                            (route) => false);
                       }
                     },
                     child: ElevatedButton(
@@ -88,14 +88,14 @@ class _SignUpPageState extends State<SignUpPage> {
                           backgroundColor: Colors.grey.shade700,
                           foregroundColor: Colors.grey.shade900,
                           shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)))),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)))),
                       onPressed: () {
                         context.read<AuthBloc>().add(SignUpRequestEvent(
                             email: emailController.text,
                             password: passwordController.text,
                             confirmPassword: confirmPasswordController.text,
                             name: nameController.text));
-
                       },
                       child: const Text(
                         'Sign Up',
@@ -119,18 +119,18 @@ class _SignUpPageState extends State<SignUpPage> {
                             MaterialPageRoute(
                               builder: (context) => BottomNavBarPage(),
                             ),
-                                (route) => false);
+                            (route) => false);
                       }
                     },
-                    child: InkWell(
-                        onTap: () {
-                          context.read<AuthBloc>().add(GoogleIconClickedEvent());
-                        },
-                        child: Container(
-                            child: Image.asset(
-                              'asset/icons/google_icon.png',
-                              height: 40,
-                            ))),
+                    // child: InkWell(
+                    //     onTap: () {
+                    //       context.read<AuthBloc>().add(GoogleIconClickedEvent());
+                    //     },
+                    //     child: Container(
+                    //         child: Image.asset(
+                    //           'asset/icons/google_icon.png',
+                    //           height: 40,
+                    //         ))),
                   ),
                 )
               ],

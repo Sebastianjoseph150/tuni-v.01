@@ -88,39 +88,40 @@ class SelectAddress extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Slidable(
-                          startActionPane:
-                              ActionPane(motion: const StretchMotion(), children: [
-                            SlidableAction(
-                              onPressed: (_) async {
-                                await FirebaseFirestore.instance
-                                    .collection('users')
-                                    .doc(userId)
-                                    .collection('address')
-                                    .doc(addressId)
-                                    .delete();
-                              },
-                              icon: Icons.delete,
-                              label: 'delete',
-                            ),
-                            SlidableAction(
-                              onPressed: (_) async {
-                                Widget dialogContent = await editAddress(
-                                    screenHeight: screenHeight,
-                                    screenWidth: screenWidth,
-                                    context: context,
-                                    itemId: addressId,
-                                    userId: userId);
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return dialogContent;
+                          startActionPane: ActionPane(
+                              motion: const StretchMotion(),
+                              children: [
+                                SlidableAction(
+                                  onPressed: (_) async {
+                                    await FirebaseFirestore.instance
+                                        .collection('users')
+                                        .doc(userId)
+                                        .collection('address')
+                                        .doc(addressId)
+                                        .delete();
                                   },
-                                );
-                              },
-                              icon: Icons.edit,
-                              label: 'edit',
-                            ),
-                          ]),
+                                  icon: Icons.delete,
+                                  label: 'delete',
+                                ),
+                                SlidableAction(
+                                  onPressed: (_) async {
+                                    Widget dialogContent = await editAddress(
+                                        screenHeight: screenHeight,
+                                        screenWidth: screenWidth,
+                                        context: context,
+                                        itemId: addressId,
+                                        userId: userId);
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return dialogContent;
+                                      },
+                                    );
+                                  },
+                                  icon: Icons.edit,
+                                  label: 'edit',
+                                ),
+                              ]),
                           child: InkWell(
                             onTap: () {
                               address = {
@@ -144,37 +145,87 @@ class SelectAddress extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               shadowColor: Colors.white,
-                              child: ListTile(
+                              child:
+                                  //  ListTile(
+                                  //   leading: Text(
+                                  //     '${index + 1}',
+                                  //     style: const TextStyle(
+                                  //         fontSize: 18,
+                                  //         fontWeight: FontWeight.w400),
+                                  //   ),
+                                  //   title: Text(
+                                  //     snapshot.data!.docs[index]['houseName']
+                                  //         .toString()
+                                  //         .toUpperCase(),
+                                  //     style: const TextStyle(
+                                  //         color: Colors.black,
+                                  //         fontSize: 18,
+                                  //         fontWeight: FontWeight.bold,
+                                  //         letterSpacing: 1.5),
+                                  //   ),
+                                  //   subtitle: Column(
+                                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                                  //     children: [
+                                  //       const SizedBox(height: 5),
+                                  //       RichText(
+                                  //           text: TextSpan(
+                                  //               text: snapshot
+                                  //                   .data!.docs[index]['city']
+                                  //                   .toString()
+                                  //                   .toUpperCase(),
+                                  //               style: const TextStyle(
+                                  //                   color: Colors.black,
+                                  //                   letterSpacing: 1),
+                                  //               children: [
+                                  //             const TextSpan(
+                                  //               text: ', ',
+                                  //             ),
+                                  //             TextSpan(
+                                  //               text: snapshot
+                                  //                   .data!.docs[index]['landmark']
+                                  //                   .toString(),
+                                  //             )
+                                  //           ])),
+                                  //       const SizedBox(height: 5),
+                                  //       Text(snapshot.data!.docs[index]['pincode']
+                                  //           .toString()),
+                                  //       const SizedBox(height: 5),
+                                  //     ],
+                                  //   ),
+                                  // ),
+                                  ListTile(
                                 leading: Text(
                                   '${index + 1}',
                                   style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w400),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                  ),
                                 ),
                                 title: Text(
                                   snapshot.data!.docs[index]['houseName']
                                       .toString()
                                       .toUpperCase(),
                                   style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 1.5),
+                                    color: Colors.black,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 1.5,
+                                  ),
                                 ),
                                 subtitle: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     const SizedBox(height: 5),
                                     RichText(
-                                        text: TextSpan(
-                                            text: snapshot
-                                                .data!.docs[index]['city']
-                                                .toString()
-                                                .toUpperCase(),
-                                            style: const TextStyle(
-                                                color: Colors.black,
-                                                letterSpacing: 1),
-                                            children: [
+                                      text: TextSpan(
+                                        text: snapshot.data!.docs[index]['city']
+                                            .toString()
+                                            .toUpperCase(),
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          letterSpacing: 1,
+                                        ),
+                                        children: [
                                           const TextSpan(
                                             text: ', ',
                                           ),
@@ -182,13 +233,50 @@ class SelectAddress extends StatelessWidget {
                                             text: snapshot
                                                 .data!.docs[index]['landmark']
                                                 .toString(),
-                                          )
-                                        ])),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                     const SizedBox(height: 5),
                                     Text(snapshot.data!.docs[index]['pincode']
                                         .toString()),
                                     const SizedBox(height: 5),
                                   ],
+                                ),
+                                trailing: IconButton(
+                                  icon: Icon(Icons.delete),
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: Text('Delete Address'),
+                                          content: Text(
+                                              'Are you sure you want to delete this address?'),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text('Cancel'),
+                                            ),
+                                            TextButton(
+                                              onPressed: () async {
+                                                await FirebaseFirestore.instance
+                                                    .collection('users')
+                                                    .doc(userId)
+                                                    .collection('address')
+                                                    .doc(addressId)
+                                                    .delete();
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text('Delete'),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
                                 ),
                               ),
                             ),
@@ -222,8 +310,9 @@ class SelectAddress extends StatelessWidget {
                               ),
                             ));
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            content: Text(
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                                content: Text(
                           'Select an address',
                           style: TextStyle(color: Colors.red),
                         )));

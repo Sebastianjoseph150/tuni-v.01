@@ -19,11 +19,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(AuthInitial()) {
     on<SignUpRequestEvent>(signUpRequestEvent);
     on<SignInRequestEvent>(signInRequestEvent);
-    on<GoogleIconClickedEvent>(googleIconClickedEvent);
+    // on<GoogleIconClickedEvent>(googleIconClickedEvent);
   }
 
-  FutureOr<void> signUpRequestEvent(SignUpRequestEvent event,
-      Emitter<AuthState> emit) async {
+  FutureOr<void> signUpRequestEvent(
+      SignUpRequestEvent event, Emitter<AuthState> emit) async {
     try {
       // final userId = user!.uid;
       // final userEmail = user!.email;
@@ -52,31 +52,36 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  FutureOr<void> signInRequestEvent(SignInRequestEvent event,
-      Emitter<AuthState> emit) async {
+  FutureOr<void> signInRequestEvent(
+      SignInRequestEvent event, Emitter<AuthState> emit) async {
     try {
       if (event.email.isEmpty || event.password.isEmpty) {
         emit(TextFieldsEmptyState());
       } else if (event.email.isNotEmpty && event.password.isNotEmpty) {
         emit(LoadingState());
-        await authRepository.signIn(
+        final result = await authRepository.signIn(
             email: event.email, password: event.password);
-        emit(Authenticated());
+        if (result == true) {
+          emit(Authenticated());
+        } else {
+          emit(AuthenticationError());
+        }
+        // emit(Authenticated());
       }
     } catch (e) {
       throw e.toString();
     }
   }
 
-  FutureOr<void> googleIconClickedEvent(GoogleIconClickedEvent event,
-      Emitter<AuthState> emit) async {
-    emit(LoadingState());
-    try {
-      // await authRepository.googleSignIn();
-      emit(Authenticated());
-    } catch (e) {
-      emit(GoogleSignInErrorState());
-      throw e.toString();
-    }
-  }
+  // FutureOr<void> googleIconClickedEvent(
+  //     GoogleIconClickedEvent event, Emitter<AuthState> emit) async {
+  //   emit(LoadingState());
+  //   try {
+  //     // await authRepository.googleSignIn();
+  //     emit(Authenticated());
+  //   } catch (e) {
+  //     emit(GoogleSignInErrorState());
+  //     throw e.toString();
+  //   }
+  // }
 }

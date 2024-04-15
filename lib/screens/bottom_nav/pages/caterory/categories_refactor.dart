@@ -7,13 +7,13 @@ Widget categoriesContainer(
   return Container(
     child: Center(
         child: Text(
-          text,
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 2),
-        )),
+      text,
+      style: TextStyle(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 2),
+    )),
     height: 60,
     width: screenWidth,
     decoration: BoxDecoration(
@@ -59,39 +59,38 @@ Widget productView(String productName, String productPrice, String image) {
             ),
           ),
           decoration: BoxDecoration(
-            // color: Colors.amber,
+              // color: Colors.amber,
               borderRadius: BorderRadius.circular(30)),
         ),
-        Container(
-          width: 160,
-          height: 60,
-          padding: EdgeInsets.all(10),
-          // color: Colors.red,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(productName.toUpperCase(),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: customTextStyle()),
-              Text("₹${productPrice}/-", style: customTextStyle())
-            ],
-          ),
+        // Container(
+        //   width: 160,
+        //   height: 66,
+        //   padding:
+        //    EdgeInsets.all(10),
+        //   // color: Colors.red,
+        //   child:
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(productName.toUpperCase(),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: customTextStyle()),
+            Text("₹${productPrice}/-", style: customTextStyle())
+          ],
         ),
+        // ),
       ],
     ),
   );
 }
 
-
-Widget categoriesItems({
-  required double screenWidth,
-  required double screenHeight,
-  required BuildContext context,
-  required className,
-  required String categoryName
-
-}) {
+Widget categoriesItems(
+    {required double screenWidth,
+    required double screenHeight,
+    required BuildContext context,
+    required className,
+    required String categoryName}) {
   return SizedBox(
       width: screenWidth,
       height: screenHeight * .05,
@@ -105,8 +104,7 @@ Widget categoriesItems({
         },
         child: Text(categoryName),
         style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(
-                Colors.blueGrey.shade600)),
+            backgroundColor:
+                MaterialStateProperty.all<Color>(Colors.blueGrey.shade600)),
       ));
-
 }

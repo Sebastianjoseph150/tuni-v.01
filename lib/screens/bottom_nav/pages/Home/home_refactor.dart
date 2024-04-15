@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tuni/bloc/favorite_bloc/favorite_repository.dart';
 import 'package:tuni/screens/bottom_nav/pages/Home/pages_in_home_page/category_product_list.dart';
 import 'package:tuni/screens/bottom_nav/pages/Home/pages_in_home_page/product_detail_page.dart';
+import 'package:tuni/screens/search/search_widget.dart';
 
 import '../../../../bloc/favorite_bloc/favorite_bloc.dart';
 import '../caterory/pages_in_categories/category_all_page.dart';
@@ -11,10 +12,10 @@ import '../caterory/pages_in_categories/category_kids_page.dart';
 import '../caterory/pages_in_categories/category_men_page.dart';
 import '../caterory/pages_in_categories/category_women_page.dart';
 
-
-
 class MainPageSliverAppBar extends StatelessWidget {
-  const MainPageSliverAppBar({
+  final TextEditingController _searchController = TextEditingController();
+
+  MainPageSliverAppBar({
     super.key,
   });
 
@@ -23,10 +24,27 @@ class MainPageSliverAppBar extends StatelessWidget {
     return SliverAppBar(
       foregroundColor: Colors.black,
       title: Text(
-        'SHAK',
+        'TUNI',
         style: TextStyle(
             letterSpacing: 8, fontSize: 30, fontWeight: FontWeight.w500),
       ),
+      actions: [
+        IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SearchScreen()));
+              // SearchBar(
+              //   controller: _searchController,
+              //   onChanged: (value) {
+              //     // Perform search operation based on the value
+              //   },
+              // );
+            },
+            icon: Icon(
+              Icons.search,
+              size: 35,
+            ))
+      ],
       floating: true,
       snap: true,
       toolbarHeight: 80,
@@ -322,27 +340,16 @@ Widget mainPageView(
 }
 
 class MainPageCarouselSlider extends StatelessWidget {
-  const MainPageCarouselSlider({
-    super.key,
-  });
+  const MainPageCarouselSlider({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: CarouselSlider(
         items: [
-          {
-            'imagePath': 'asset/images/carousel_slider_image/pants copy.webp',
-            'text': 'Pants'
-          },
-          {
-            'imagePath': 'asset/images/carousel_slider_image/shirts copy.webp',
-            'text': 'Shirts'
-          },
-          {
-            'imagePath': 'asset/images/carousel_slider_image/tshirts copy.webp',
-            'text': 'T-shirts'
-          },
+          {'imagePath': 'Assets/Images/BAnner_grande.webp', 'text': 'T-shirts'},
+          {'imagePath': 'Assets/Images/images.jpg', 'text': 'Shirts'},
+          {'imagePath': 'Assets/Images/BAnner_grande.webp', 'text': 'T-shirts'},
         ].map((item) {
           return Builder(
             builder: (BuildContext context) {
@@ -355,40 +362,7 @@ class MainPageCarouselSlider extends StatelessWidget {
                 ),
                 child: InkWell(
                   onTap: () {
-                    if (item['text'] == 'Pants') {
-                      final pantSnapshot = FirebaseFirestore.instance
-                          .collection('Clothes')
-                          .where('category', isEqualTo: 'Pant')
-                          .snapshots();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CategoryProductList(
-                                firestore: pantSnapshot, heading: "pants"),
-                          ));
-                    } else if (item['text'] == 'T-shirts') {
-                      final tShirtSnapshot = FirebaseFirestore.instance
-                          .collection('Clothes')
-                          .where('category', isEqualTo: 'T-shirt')
-                          .snapshots();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CategoryProductList(
-                                firestore: tShirtSnapshot, heading: "t-shirts"),
-                          ));
-                    } else {
-                      final shirtSnapshot = FirebaseFirestore.instance
-                          .collection('Clothes')
-                          .where('category', isEqualTo: 'Shirt')
-                          .snapshots();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CategoryProductList(
-                                firestore: shirtSnapshot, heading: "shirts"),
-                          ));
-                    }
+                    // Handle onTap action here
                   },
                   child: Stack(
                     fit: StackFit.expand,
@@ -403,15 +377,15 @@ class MainPageCarouselSlider extends StatelessWidget {
                       Positioned(
                         child: Container(
                           padding: EdgeInsets.all(10),
-                          // color: Colors.black.withOpacity(0.7),
                           child: Center(
                             child: Text(
                               item['text']!,
                               style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 33,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 3),
+                                color: Colors.white,
+                                fontSize: 33,
+                                fontWeight: FontWeight.bold,
+                                letterSpacing: 3,
+                              ),
                             ),
                           ),
                         ),
@@ -423,7 +397,10 @@ class MainPageCarouselSlider extends StatelessWidget {
             },
           );
         }).toList(),
-        options: CarouselOptions(),
+        options: CarouselOptions(
+          autoPlay: true, // Enable auto play
+          // Add other options here
+        ),
       ),
     );
   }

@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 // import 'package:meta/meta.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:tuni/bloc/cart_bloc/cart_repository.dart';
+import 'package:tuni/screens/drawer/pages_in_drawer/my_orders/user_orders.dart';
 
 import '../../../../../model/cart_model.dart';
 import '../../model/product_order_model.dart';
@@ -106,12 +107,16 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       RazorPayEvent event, Emitter<CartState> emit) async {
     try {
       Map<String, dynamic> options = {
-        'key': 'rzp_test_TpsHVKhrkZuIUJ',
+        'key': 'rzp_live_G0zIOHVwXX4lMK',
+        // rzp_live_G0zIOHVwXX4lMK
         'amount': event.amount * 100,
-        'name': 'Saiful Hamid A K',
-        'description': 'demo',
+        'name': 'Tuni',
+        'description': 'Payment for tuni',
         'timeout': 300,
-        'prefill': {'contact': '7591926222', 'email': 'saifulhamid@gmail.com'}
+        'prefill': {
+          'contact': '8088473612',
+          'email': 'tunitechsolution@gmail.com'
+        }
       };
       _razorpay.on(Razorpay.EVENT_PAYMENT_SUCCESS,
           (PaymentSuccessResponse response) {
@@ -122,7 +127,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             address: event.address,
             mobile: event.mobile,
             orderList: event.orderList);
-
+        Navigator.pushReplacement(event.context,
+            MaterialPageRoute(builder: (context) => UserOrders()));
       });
 
       _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR,

@@ -24,14 +24,13 @@ class _CartPageState extends State<CartPage> {
 
   final User? user = FirebaseAuth.instance.currentUser;
 
-
   @override
   void dispose() {
     // productIds.clear();
     super.dispose();
   }
-  List<OrderModel> productIds = [];
 
+  List<OrderModel> productIds = [];
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +48,7 @@ class _CartPageState extends State<CartPage> {
       drawer: DrawerWidget(),
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'CART',
           style: TextStyle(
             fontSize: 18,
@@ -71,23 +70,25 @@ class _CartPageState extends State<CartPage> {
                 total = 0;
 
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const Center(child: CircularProgressIndicator());
                 }
-                if (snapshot.hasError)
-                  return Center(child: Text("Some error occurred"));
-                if (snapshot.data!.docs.isEmpty)
+                if (snapshot.hasError) {
+                  return const Center(child: Text("Some error occurred"));
+                }
+                if (snapshot.data!.docs.isEmpty) {
                   return Center(
                     child: SizedBox(
                       height: screenHeight * .52,
-                      child: Column(
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [Text('Your Cart is Empty')],
                       ),
                     ),
                   );
+                }
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) {
                     final value = snapshot.data!.docs[index];
@@ -117,6 +118,18 @@ class _CartPageState extends State<CartPage> {
                       child: Container(
                         height: screenHeight * .169,
                         width: screenWidth,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.1),
+                                spreadRadius: 1,
+                                blurRadius: 7,
+                                offset: const Offset(0, 2),
+                              ),
+                            ],
+                            color: Colors.grey.shade100,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(15))),
                         child: Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Row(children: [
@@ -129,7 +142,7 @@ class _CartPageState extends State<CartPage> {
                                 width: screenWidth * .25,
                               ),
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -143,7 +156,7 @@ class _CartPageState extends State<CartPage> {
                                         child: Text(
                                           name,
                                           overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold,
                                               letterSpacing: 1),
@@ -155,7 +168,7 @@ class _CartPageState extends State<CartPage> {
                                               context: context,
                                               builder: (context) {
                                                 return AlertDialog(
-                                                  content: Text(
+                                                  content: const Text(
                                                       "Remove this item from cart?"),
                                                   actions: [
                                                     TextButton(
@@ -163,7 +176,8 @@ class _CartPageState extends State<CartPage> {
                                                           Navigator.pop(
                                                               context);
                                                         },
-                                                        child: Text("No")),
+                                                        child:
+                                                            const Text("No")),
                                                     TextButton(
                                                         onPressed: () {
                                                           context
@@ -174,7 +188,7 @@ class _CartPageState extends State<CartPage> {
                                                           ScaffoldMessenger.of(
                                                                   context)
                                                               .showSnackBar(
-                                                                  SnackBar(
+                                                                  const SnackBar(
                                                             content: Text(
                                                                 "Removed From Cart"),
                                                             duration: Duration(
@@ -184,37 +198,40 @@ class _CartPageState extends State<CartPage> {
                                                           Navigator.pop(
                                                               context);
                                                         },
-                                                        child: Text("Yes"))
+                                                        child:
+                                                            const Text("Yes"))
                                                   ],
                                                 );
                                               },
                                             );
                                           },
-                                          child: Text('Remove'))
+                                          child: const Text('Remove'))
                                     ],
                                   ),
                                 ),
                                 RichText(
                                     text: TextSpan(
                                         text: 'SIZE: ',
-                                        style: TextStyle(color: Colors.black),
+                                        style: const TextStyle(
+                                            color: Colors.black),
                                         children: [
                                       TextSpan(
                                           text: size,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.w500))
                                     ])),
                                 RichText(
                                     text: TextSpan(
                                         text: 'COLOR: ',
-                                        style: TextStyle(color: Colors.black),
+                                        style: const TextStyle(
+                                            color: Colors.black),
                                         children: [
                                       TextSpan(
                                           text: color,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontWeight: FontWeight.w500))
                                     ])),
-                                Spacer(),
+                                const Spacer(),
                                 SizedBox(
                                   width: screenWidth * .6,
                                   child: Row(
@@ -223,7 +240,7 @@ class _CartPageState extends State<CartPage> {
                                     children: [
                                       Text(
                                         '₹${price}/-',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.bold,
                                             letterSpacing: 1),
@@ -237,6 +254,12 @@ class _CartPageState extends State<CartPage> {
                                           return Container(
                                             width: 115,
                                             height: 35,
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color: Colors.black45),
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(7))),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
@@ -250,15 +273,15 @@ class _CartPageState extends State<CartPage> {
                                                             itemId: id,
                                                           ));
                                                     },
-                                                    icon: Icon(
+                                                    icon: const Icon(
                                                       Icons.remove,
                                                       size: 15,
                                                     )),
                                                 Container(
                                                     child: Text(
                                                   itemCount.toString(),
-                                                  style:
-                                                      TextStyle(fontSize: 15),
+                                                  style: const TextStyle(
+                                                      fontSize: 15),
                                                 )),
                                                 IconButton(
                                                     onPressed: () {
@@ -269,17 +292,12 @@ class _CartPageState extends State<CartPage> {
                                                             itemId: id,
                                                           ));
                                                     },
-                                                    icon: Icon(
+                                                    icon: const Icon(
                                                       Icons.add,
                                                       size: 15,
                                                     )),
                                               ],
                                             ),
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color: Colors.black45),
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(7))),
                                           );
                                         },
                                       )
@@ -291,18 +309,6 @@ class _CartPageState extends State<CartPage> {
                             ),
                           ]),
                         ),
-                        decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.1),
-                                spreadRadius: 1,
-                                blurRadius: 7,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
-                            color: Colors.grey.shade100,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(15))),
                       ),
                     );
                   },
@@ -317,6 +323,7 @@ class _CartPageState extends State<CartPage> {
             if (snapshot.data!.docs.isNotEmpty) {
               return BottomAppBar(
                 elevation: 0,
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(10),
                   child: SizedBox(
@@ -328,7 +335,7 @@ class _CartPageState extends State<CartPage> {
                           builder: (context) {
                             return AlertDialog(
                               title: Text('Your Cart total is ₹$total/-'),
-                              content: Text("Proceed to checkout?"),
+                              content: const Text("Proceed to checkout?"),
                               // content: Text(
                               //     'The total amount of your products is $total \n Go to checkout??'),
                               actions: [
@@ -336,7 +343,7 @@ class _CartPageState extends State<CartPage> {
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Text('cancel',
+                                  child: const Text('cancel',
                                       style: TextStyle(color: Colors.red)),
                                 ),
                                 TextButton(
@@ -351,14 +358,14 @@ class _CartPageState extends State<CartPage> {
                                       ),
                                     );
                                   },
-                                  child: Text('Go to checkout'),
+                                  child: const Text('Go to checkout'),
                                 ),
                               ],
                             );
                           },
                         );
                       },
-                      child: Text("PROCEED TO CHECKOUT"),
+                      child: const Text("PROCEED TO CHECKOUT"),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blueGrey,
                         shape: RoundedRectangleBorder(
@@ -368,11 +375,10 @@ class _CartPageState extends State<CartPage> {
                     ),
                   ),
                 ),
-                color: Colors.white,
               );
             }
           }
-          return SizedBox();
+          return const SizedBox();
         },
       ),
     );

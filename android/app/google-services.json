@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "682471459218",
+    "project_id": "tuni-c0211",
+    "storage_bucket": "tuni-c0211.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:682471459218:android:d83da5ecbdc9547a02994b",
+        "android_client_info": {
+          "package_name": "com.techtuni.tuni"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "682471459218-panb40lqhdeodt5ngf16c71d7qls682t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiFsnWnItL0JeshPrhB4ymxz5Xl0IYuoY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "682471459218-panb40lqhdeodt5ngf16c71d7qls682t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

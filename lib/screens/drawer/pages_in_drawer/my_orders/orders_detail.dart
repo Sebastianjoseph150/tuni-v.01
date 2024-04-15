@@ -53,11 +53,12 @@ class OrderDetailPage extends StatelessWidget {
             stream: stream,
             builder: (context, snapshot) {
               final productIds;
-              if(!snapshot.hasData || !snapshot.data!.exists){
-                return Center(child: CircularProgressIndicator(),);
+              if (!snapshot.hasData || !snapshot.data!.exists) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
               } else {
                 productIds = snapshot.data!.get("productId");
-
               }
               final address = snapshot.data!.get("address");
               final name = snapshot.data!.get("userName");
@@ -99,39 +100,43 @@ class OrderDetailPage extends StatelessWidget {
                       final pincode = address["pincode"];
                       final imageUrl =
                           List<String>.from(snapshot.data!.get("imageUrl"));
-                      return ListTile(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => OrderedProductDetail(
-                                  imageUrl: imageUrl,
-                                  productName: productName,
-                                  price: price,
-                                  houseName: houseName,
-                                  landmark: landmark,
-                                  pincode: pincode,
-                                  place: city,
-                                  name: name,
-                                  email: email,
-                                  number: number,
-                                  quantity: quantity,
+                      return Column(
+                        children: [
+                          ListTile(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => OrderedProductDetail(
+                                      imageUrl: imageUrl,
+                                      productName: productName,
+                                      price: price,
+                                      houseName: houseName,
+                                      landmark: landmark,
+                                      pincode: pincode,
+                                      place: city,
+                                      name: name,
+                                      email: email,
+                                      number: number,
+                                      quantity: quantity,
+                                    ),
+                                  ));
+                            },
+                            leading: Container(
+                              width: 50,
+                              height: 70,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                image: DecorationImage(
+                                  image: NetworkImage(imageUrl[0]),
+                                  fit: BoxFit.cover,
                                 ),
-                              ));
-                        },
-                          leading: Container(
-                            width: 50,
-                            height: 70,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              image: DecorationImage(
-                                image: NetworkImage(imageUrl[0]),
-                                fit: BoxFit.cover,
                               ),
                             ),
+                            title: Text(productName),
+                            subtitle: Text("₹$price/-"),
                           ),
-                        title: Text(productName),
-                        subtitle: Text("₹$price/-"),
+                        ],
                       );
                     },
                   );

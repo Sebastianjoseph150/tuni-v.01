@@ -5,7 +5,6 @@ import 'package:tuni/screens/drawer/pages_in_drawer/profile/user_profile_add.dar
 import 'package:tuni/screens/drawer/pages_in_drawer/profile/user_profile_edit.dart';
 import 'package:tuni/screens/drawer/pages_in_drawer/profile/user_profile_refactor.dart';
 
-
 class UserProfile extends StatelessWidget {
   UserProfile({super.key});
 
@@ -22,7 +21,7 @@ class UserProfile extends StatelessWidget {
         .collection("users")
         .doc(userId)
         .collection("personal_details")
-        .doc(userEmail)
+        .doc(userEmail!)
         .snapshots();
     String firstName;
     String lastName;
@@ -65,15 +64,15 @@ class UserProfile extends StatelessWidget {
                   return Text(" ");
                 } else {
                   final data = snapshot.data!;
-                  firstName = data["first_name"];
-                  lastName = data["last_name"];
-                  number = data['phone_number'];
-                  gender = data["gender"];
-                  Map<String, dynamic> dateMap = data["date"];
-                  day = dateMap["day"];
-                  month = dateMap["month"];
-                  year = dateMap["year"];
-                  final dob = "$day/$month/$year";
+                  firstName = data["name"];
+                  // lastName = data["last_name"];
+                  // number = data['phone_number'];
+                  // gender = data["gender"];
+                  // Map<String, dynamic> dateMap = data["date"];
+                  // day = dateMap["day"];
+                  // month = dateMap["month"];
+                  // year = dateMap["year"];
+                  // final dob = "$day/$month/$year";
 
                   return Container(
                     height: screenHeight * .8,
@@ -94,19 +93,19 @@ class UserProfile extends StatelessWidget {
                           SizedBox(height: 20),
                           userDetailsHeadingText(text: "Last name"),
                           SizedBox(height: 5),
-                          userDetailsDisplayingText(lastName),
+                          // userDetailsDisplayingText(lastName),
                           SizedBox(height: 20),
                           userDetailsHeadingText(text: "Date of birth"),
                           SizedBox(height: 5),
-                          userDetailsDisplayingText(dob),
+                          // userDetailsDisplayingText(dob),
                           SizedBox(height: 20),
                           userDetailsHeadingText(text: "Number"),
                           SizedBox(height: 5),
-                          userDetailsDisplayingText(number),
+                          // userDetailsDisplayingText(number),
                           SizedBox(height: 20),
                           userDetailsHeadingText(text: "Gender"),
                           SizedBox(height: 5),
-                          userDetailsDisplayingText(gender),
+                          // userDetailsDisplayingText(gender),
                           SizedBox(height: 20),
                         ],
                       ),

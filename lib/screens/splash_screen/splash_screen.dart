@@ -18,13 +18,13 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     final user = auth.currentUser;
     return FlutterSplashScreen.fadeIn(
-      animationDuration: Duration(seconds: 5),
+      animationDuration: Duration(seconds: 4),
       duration: Duration(seconds: 3),
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 83, 26, 151),
       childWidget: SizedBox(
-        height: 200,
-        width: 200,
-        child: Image.asset("asset/images/SHAK.png"),
+        height: 300,
+        width: 300,
+        child: Image.asset("Assets/LOGO.png"),
       ),
       nextScreen: user != null ? BottomNavBarPage() : LogInPage(),
     );

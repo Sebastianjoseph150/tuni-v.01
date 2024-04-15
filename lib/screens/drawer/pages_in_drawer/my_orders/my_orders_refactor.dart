@@ -1,22 +1,20 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 class OtherDetailsInOrderDetailPage extends StatelessWidget {
-  const OtherDetailsInOrderDetailPage({
-    super.key,
-    required this.productName,
-    required this.price,
-    required this.screenHeight,
-    required this.name,
-    required this.number,
-    required this.email,
-    required this.houseName,
-    required this.place,
-    required this.landmark,
-    required this.pincode,
-    required this.quantity
-  });
+  const OtherDetailsInOrderDetailPage(
+      {super.key,
+      required this.productName,
+      required this.price,
+      required this.screenHeight,
+      required this.name,
+      required this.number,
+      required this.email,
+      required this.houseName,
+      required this.place,
+      required this.landmark,
+      required this.pincode,
+      required this.quantity});
 
   final String productName;
   final String price;
@@ -32,39 +30,40 @@ class OtherDetailsInOrderDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: Text(
-                  productName.toUpperCase(),
-                  maxLines: 5,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w500,
-                      letterSpacing: 2),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    productName.toUpperCase(),
+                    maxLines: 5,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 2),
+                  ),
+                  Text(
+                    '₹${price}/-',
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 2),
+                  ),
+                ],
               ),
-              Text(
-                '₹${price}/-',
-                style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 2),
-              ),
-            ],
-          ),
-          SizedBox(height: screenHeight * .02),
-          AddressTextSpanOrderedDetailPage(heading:"Ordered Quantity" ,text: quantity.toString()),
-          SizedBox(height: screenHeight * .02),
-          Container(
-              child: Column(
+              SizedBox(height: screenHeight * .02),
+              AddressTextSpanOrderedDetailPage(
+                  heading: "Ordered Quantity", text: quantity.toString()),
+              SizedBox(height: screenHeight * .02),
+              Container(
+                  child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -75,16 +74,18 @@ class OtherDetailsInOrderDetailPage extends StatelessWidget {
                         fontSize: 18),
                   ),
                   SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(heading:"Name" ,text: name),
+                  AddressTextSpanOrderedDetailPage(heading: "Name", text: name),
                   SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(heading:"mobile" ,text: number),
+                  AddressTextSpanOrderedDetailPage(
+                      heading: "mobile", text: number),
                   SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(heading:"email" ,text: email),
+                  AddressTextSpanOrderedDetailPage(
+                      heading: "email", text: email),
                 ],
               )),
-          SizedBox(height: screenHeight * .02),
-          Container(
-              child: Column(
+              SizedBox(height: screenHeight * .02),
+              Container(
+                  child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -95,17 +96,23 @@ class OtherDetailsInOrderDetailPage extends StatelessWidget {
                         fontSize: 18),
                   ),
                   SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(heading:"House Name" ,text: houseName),
+                  AddressTextSpanOrderedDetailPage(
+                      heading: "House Name", text: houseName),
                   SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(heading:"City" ,text: place),
+                  AddressTextSpanOrderedDetailPage(
+                      heading: "City", text: place),
                   SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(heading:"landmark" ,text: landmark),
+                  AddressTextSpanOrderedDetailPage(
+                      heading: "landmark", text: landmark),
                   SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(heading:"pincode" ,text: pincode),
+                  AddressTextSpanOrderedDetailPage(
+                      heading: "pincode", text: pincode),
                 ],
               )),
-        ],
-      ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
@@ -148,8 +155,8 @@ class OrderedDetailPageCarouselSlider extends StatelessWidget {
             },
           );
         }).toList(),
-        options: CarouselOptions(
-            height: screenHeight * .5, viewportFraction: 1));
+        options:
+            CarouselOptions(height: screenHeight * .5, viewportFraction: 1));
   }
 }
 
@@ -170,10 +177,10 @@ class AddressTextSpanOrderedDetailPage extends StatelessWidget {
             text: "$heading: ",
             style: TextStyle(color: Colors.black, fontSize: 17),
             children: [
-              TextSpan(
-                  text: text.toUpperCase(),
-                  style: TextStyle(
-                      color: Colors.black, fontSize: 17, letterSpacing: 1))
-            ]));
+          TextSpan(
+              text: text.toUpperCase(),
+              style: TextStyle(
+                  color: Colors.black, fontSize: 17, letterSpacing: 1))
+        ]));
   }
 }
