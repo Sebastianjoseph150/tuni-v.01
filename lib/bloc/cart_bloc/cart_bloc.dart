@@ -107,8 +107,9 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       RazorPayEvent event, Emitter<CartState> emit) async {
     try {
       Map<String, dynamic> options = {
-        'key': 'rzp_live_G0zIOHVwXX4lMK',
-        // rzp_live_G0zIOHVwXX4lMK
+        'key': 'rzp_test_TpsHVKhrkZuIUJ',
+        // rzp_test_TpsHVKhrkZuIUJ
+        //rzp_live_G0zIOHVwXX4lMK
         'amount': event.amount * 100,
         'name': 'Tuni',
         'description': 'Payment for tuni',

@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-import '../../Home/pages_in_home_page/product_detail_page.dart';
-import '../categories_refactor.dart';
+// import '../../Home/pages_in_home_page/product_detail_page.dart';
+// import '../categories_refactor.dart';
 
 class KidsCategory extends StatelessWidget {
   KidsCategory({super.key});
@@ -26,8 +26,7 @@ class KidsCategory extends StatelessWidget {
         ),
         body: Center(
           child: Container(
-            child: Lottie.asset(
-                'Assets/Animations/Animation - 1712811794298.json'),
+            child: Lottie.asset('Assets/Animation - 1712811794298.json'),
           ),
           //    StreamBuilder<QuerySnapshot>(
           //     stream: firestore,

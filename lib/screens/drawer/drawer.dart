@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuni/screens/auth/sign_in/login.dart';
+import 'package:tuni/screens/category/new_cat.dart';
 import 'package:tuni/screens/drawer/pages_in_drawer/my_orders/user_orders.dart';
 import 'package:tuni/screens/drawer/pages_in_drawer/profile/user_profile.dart';
 import 'package:tuni/screens/drawer/pages_in_drawer/shipping_address/shipping_address.dart';
@@ -63,7 +64,7 @@ class DrawerWidget extends StatelessWidget {
                   ));
             },
             child:
-            ListTile(leading: Icon(Icons.person), title: Text('Profile')),
+                ListTile(leading: Icon(Icons.person), title: Text('Profile')),
           ),
           InkWell(
             onTap: () {
@@ -77,6 +78,15 @@ class DrawerWidget extends StatelessWidget {
                 leading: Icon(Icons.shopping_cart_sharp),
                 title: Text('My Orders')),
           ),
+          InkWell(
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => CAt()));
+              },
+              child: ListTile(
+                leading: Icon(Icons.new_label),
+                title: Text('test'),
+              )),
           InkWell(
             onTap: () {
               Navigator.push(context,
@@ -108,7 +118,7 @@ class DrawerWidget extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => LogInPage()),
-                                    (route) => false,
+                                (route) => false,
                               );
                             },
                             child: Text(

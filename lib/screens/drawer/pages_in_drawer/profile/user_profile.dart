@@ -35,7 +35,7 @@ class UserProfile extends StatelessWidget {
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
         foregroundColor: Colors.black,
-        title: Text(
+        title: const Text(
           'MY PROFILE',
           style: TextStyle(
             fontSize: 16,
@@ -53,15 +53,15 @@ class UserProfile extends StatelessWidget {
               stream: firestore,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Text("Error: ${snapshot.error}");
                 } else if (!snapshot.hasData || !snapshot.data!.exists) {
-                  return SizedBox(
+                  return const SizedBox(
                       height: 500,
                       child: Center(child: Text("No Personal data added!")));
                 } else if (!snapshot.hasData || !snapshot.data!.exists) {
-                  return Text(" ");
+                  return const Text(" ");
                 } else {
                   final data = snapshot.data!;
                   firstName = data["name"];
@@ -82,31 +82,31 @@ class UserProfile extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           userDetailsHeadingText(text: "Email"),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           userDetailsDisplayingText(user!.email),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           userDetailsHeadingText(text: "First name"),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           userDetailsDisplayingText(firstName),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           userDetailsHeadingText(text: "Last name"),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           // userDetailsDisplayingText(lastName),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           userDetailsHeadingText(text: "Date of birth"),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           // userDetailsDisplayingText(dob),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           userDetailsHeadingText(text: "Number"),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           // userDetailsDisplayingText(number),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           userDetailsHeadingText(text: "Gender"),
-                          SizedBox(height: 5),
+                          const SizedBox(height: 5),
                           // userDetailsDisplayingText(gender),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                         ],
                       ),
                     ),
@@ -121,7 +121,7 @@ class UserProfile extends StatelessWidget {
         stream: firestore,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return BottomAppBar(
+            return const BottomAppBar(
               child: CircularProgressIndicator(),
             );
           } else if (snapshot.hasError) {
@@ -137,7 +137,7 @@ class UserProfile extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => UserProfileAdd()));
                 },
-                child: Text("Add Detail"),
+                child: const Text("Add Detail"),
               ),
             );
           } else {
@@ -149,7 +149,7 @@ class UserProfile extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => UserProfileEdit()));
                 },
-                child: Text("Edit Details"),
+                child: const Text("Edit Details"),
               ),
             );
           }
@@ -158,5 +158,5 @@ class UserProfile extends StatelessWidget {
     );
   }
 
-  SizedBox buildSizedBox() => SizedBox(height: 15);
+  SizedBox buildSizedBox() => const SizedBox(height: 15);
 }

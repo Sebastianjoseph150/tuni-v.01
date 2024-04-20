@@ -9,6 +9,7 @@ import 'package:tuni/bloc/personal_details_bloc/personal_detail_bloc.dart';
 import 'package:tuni/bloc/user_profile_bloc/user_profile_bloc.dart';
 import 'package:tuni/firebase_options.dart';
 import 'package:tuni/provider/Google_signin_provider.dart';
+import 'package:tuni/provider/category_provider.dart';
 import 'package:tuni/screens/bottom_nav/bottom_navigation_bar/routes/generated_routes.dart';
 import 'package:tuni/screens/splash_screen/splash_screen.dart';
 
@@ -17,7 +18,7 @@ import 'bloc/auth_bloc/auth_bloc.dart';
 import 'bloc/bnb_bloc/bottom_nav_bloc.dart';
 import 'bloc/cart_bloc/cart_bloc.dart';
 import 'bloc/home_bloc/home_bloc.dart';
-import 'package:flutter_stripe/flutter_stripe.dart';
+// import 'package:flutter_stripe/flutter_stripe.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
       create: (context) => AuthRepository(),
       child: MultiBlocProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => GoogleSignInProvider()),
+          // ChangeNotifierProvider(create: (context) => GoogleSignInProvider()),
+          ChangeNotifierProvider(create: (context) => CategorySelect()),
           BlocProvider(create: (context) => AuthBloc()),
           BlocProvider(create: (context) => BottomNavBloc()),
           BlocProvider(create: (context) => HomeBloc()),

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tuni/screens/drawer/pages_in_drawer/my_orders/Order_progress_bar/order_bar.dart';
 import 'package:tuni/screens/drawer/pages_in_drawer/my_orders/ordered_product_detail.dart';
 
 class OrderDetailPage extends StatelessWidget {
@@ -135,6 +136,10 @@ class OrderDetailPage extends StatelessWidget {
                             ),
                             title: Text(productName),
                             subtitle: Text("₹$price/-"),
+                          ),
+                          OrderProgressBar(
+                            currentIndex: 2,
+                            totalSteps: 4,
                           ),
                         ],
                       );

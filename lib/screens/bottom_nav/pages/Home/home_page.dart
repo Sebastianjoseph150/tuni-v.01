@@ -30,16 +30,16 @@ class _HomePageState extends State<HomePage> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              MainPageCarouselSlider(),
-              SizedBox(height: 35),
+              const MainPageCarouselSlider(),
+              const SizedBox(height: 35),
               mainPageHeading('Explore'),
               MainPageGridViewProductList(firestore: firestore),
-              MainPageSeeMoreTextButton(),
-              SizedBox(height: 30),
+              const MainPageSeeMoreTextButton(),
+              const SizedBox(height: 30),
               mainPageHeading('Filter by CATEGORY'),
               MainPageFilterByCategory(
                   screenWidth: screenWidth, screenHeight: screenHeight),
-              Divider()
+              const Divider()
             ],
           ),
         ),
@@ -47,4 +47,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

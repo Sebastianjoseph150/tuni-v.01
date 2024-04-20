@@ -59,10 +59,8 @@ class UserOrders extends StatelessWidget {
             itemCount: snapshot.data!.docs.length,
             itemBuilder: (context, index) {
               final orderId = reversedDoc[index]['orderId'];
-              // final address = reversedDoc[index]['address'];
               final orderDateString = reversedDoc[index]['orderDate'] as String;
               final formattedDate = _parseDate(orderDateString);
-              // final houseName = address['houseName'];
               return InkWell(
                 onTap: () {
                   Navigator.push(

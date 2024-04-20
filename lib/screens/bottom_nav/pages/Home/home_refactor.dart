@@ -23,7 +23,7 @@ class MainPageSliverAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       foregroundColor: Colors.black,
-      title: Text(
+      title: const Text(
         'TUNI',
         style: TextStyle(
             letterSpacing: 8, fontSize: 30, fontWeight: FontWeight.w500),
@@ -40,7 +40,7 @@ class MainPageSliverAppBar extends StatelessWidget {
               //   },
               // );
             },
-            icon: Icon(
+            icon: const Icon(
               Icons.search,
               size: 35,
             ))
@@ -145,7 +145,7 @@ class MainPageSeeMoreTextButton extends StatelessWidget {
                 builder: (context) => AllCategory(),
               ));
         },
-        child: Text('view all products'));
+        child: const Text('view all products'));
   }
 }
 
@@ -166,7 +166,7 @@ class MainPageGridViewProductList extends StatelessWidget {
           stream: firestore,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting)
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
 
@@ -175,8 +175,8 @@ class MainPageGridViewProductList extends StatelessWidget {
 
             return GridView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: .75, crossAxisCount: 2),
               itemCount: products.length < 4 ? products.length : 4,
               itemBuilder: (context, index) {
@@ -236,7 +236,7 @@ class MainPageGridViewProductList extends StatelessWidget {
 Widget mainPageHeading(String text) {
   return Text(
     text.toUpperCase(),
-    style: TextStyle(fontSize: 20, letterSpacing: 3),
+    style: const TextStyle(fontSize: 20, letterSpacing: 3),
   );
 }
 
@@ -265,7 +265,7 @@ Widget mainPageCircularAvatar({
 }
 
 TextStyle customTextStyle() {
-  return TextStyle(
+  return const TextStyle(
     letterSpacing: 1,
     fontSize: 15,
     fontWeight: FontWeight.w500,
@@ -303,7 +303,7 @@ Widget mainPageView(
                     if (loadingProgress == null) {
                       return child;
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -319,7 +319,7 @@ Widget mainPageView(
         Container(
           width: 160,
           height: 60,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           // color: Colors.red,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -355,10 +355,10 @@ class MainPageCarouselSlider extends StatelessWidget {
             builder: (BuildContext context) {
               return Container(
                 width: MediaQuery.of(context).size.width,
-                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                margin: const EdgeInsets.symmetric(horizontal: 5.0),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
                 child: InkWell(
                   onTap: () {
@@ -368,7 +368,8 @@ class MainPageCarouselSlider extends StatelessWidget {
                     fit: StackFit.expand,
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(20)),
                         child: Image.asset(
                           item['imagePath']!,
                           fit: BoxFit.cover,
@@ -376,11 +377,11 @@ class MainPageCarouselSlider extends StatelessWidget {
                       ),
                       Positioned(
                         child: Container(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: Center(
                             child: Text(
                               item['text']!,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 33,
                                 fontWeight: FontWeight.bold,

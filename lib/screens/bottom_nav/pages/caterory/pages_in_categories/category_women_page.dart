@@ -26,8 +26,7 @@ class WomenCategory extends StatelessWidget {
         ),
         body: Center(
           child: Container(
-            child: Lottie.asset(
-                'Assets/Animations/Animation - 1712811794298.json'),
+            child: Lottie.asset('Assets/Animation - 1712811794298.json'),
           ),
         )
         //  StreamBuilder<QuerySnapshot>(
