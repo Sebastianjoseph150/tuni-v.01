@@ -1,6 +1,5 @@
 part of 'personal_detail_bloc.dart';
 
-@immutable
 abstract class PersonalDetailEvent {}
 
 class OnAddPersonalDetailsEvent extends PersonalDetailEvent {
@@ -9,4 +8,13 @@ class OnAddPersonalDetailsEvent extends PersonalDetailEvent {
 
   OnAddPersonalDetailsEvent(
       {required this.name, required this.phone});
+}
+
+class OnAddPersonalDetailsEventIOS extends PersonalDetailEvent {
+  final String firstName;
+  final String lastName;
+  final String number;
+
+  OnAddPersonalDetailsEventIOS(
+      {required this.firstName, required this.lastName, required this.number});
 }

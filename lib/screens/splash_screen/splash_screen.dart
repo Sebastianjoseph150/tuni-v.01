@@ -19,8 +19,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     final user = auth.currentUser;
     return FlutterSplashScreen.fadeIn(
-      animationDuration: Duration(seconds: 7),
-      duration: Duration(seconds: 3),
+      animationDuration: const Duration(seconds: 7),
+      duration: const Duration(seconds: 3),
       backgroundColor: Colors.white,
       childWidget: SizedBox(
           height: 500,
@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
               Lottie.asset('Assets/Animations/Animation - 1713270854970.json')
           //  Image.asset("Assets/LOGO.png"),
           ),
-      nextScreen: user != null ? BottomNavBarPage() : LogInPage(),
+      nextScreen: user != null ? const BottomNavBarPage() : LogInPage(),
     );
   }
 }

@@ -1,6 +1,5 @@
 part of 'size_bloc.dart';
 
-@immutable
 abstract class SizeEvent {}
 
 class OnChooseSizeEvent extends SizeEvent {

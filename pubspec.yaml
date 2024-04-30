@@ -35,7 +35,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.6
+  cupertino_icons: ^1.0.8
   firebase_auth: ^4.19.1
   flutter_bloc: ^8.1.5
   firebase_core: ^2.29.0
@@ -51,13 +51,14 @@ dependencies:
   flutter_slidable: ^3.1.0
   carousel_slider: ^4.2.1
   flutter_string_extractor: ^0.1.1
-  flutter_stripe: ^10.1.1
   lottie: ^3.1.0
   flutter_rating_bar: ^4.0.1
-  google_sign_in: ^6.2.1
   provider: ^6.1.2
   timeline_tile: ^2.0.0
   side_navigation: ^1.0.4
+  flutter_custom_carousel_slider: ^1.2.0
+  shimmer: ^3.0.0
+  advance_pdf_viewer: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -74,6 +75,8 @@ flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
   image_path: "Assets/logo/Tuni logo.png"
+  remove_alpha_ios: true
+
   # min_sdk_android: 21 # android min sdk min:16, default 21
   # web:
   #   generate: true
@@ -101,6 +104,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - Assets/category_page/
+    - Assets/home_page/
+    - Assets/logo/
     - Assets/tuni.jpeg
     - Assets/Animation - 1712811794298.json
     - Assets/Images/BAnner_grande.webp
@@ -109,6 +115,7 @@ flutter:
     - Assets/logo/Tuni logo.svg
     - Assets/Animation - 1713270345550.json
     - Assets/Animations/Animation - 1713270854970.json
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

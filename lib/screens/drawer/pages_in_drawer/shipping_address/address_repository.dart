@@ -18,7 +18,7 @@ class AddressRepository {
         return snapshot.docs.map((address) {
           return AddressModel(houseName: address['houseName'],
               city: address['city'],
-              landMark: address['landMark'],
+              landMark: address['landmark'],
               pincode: address['pincode']);
         }).toList();
       }

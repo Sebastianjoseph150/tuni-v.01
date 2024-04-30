@@ -7,9 +7,8 @@ class CategoryProductList extends StatelessWidget {
   final Stream<QuerySnapshot<Object?>> firestore;
   final String heading;
 
-  CategoryProductList(
-      {Key? key, required this.firestore, required this.heading})
-      : super(key: key);
+  const CategoryProductList(
+      {super.key, required this.firestore, required this.heading});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class CategoryProductList extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           heading.toUpperCase(),
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w500,
             letterSpacing: 2,
@@ -34,12 +33,12 @@ class CategoryProductList extends StatelessWidget {
                 stream: firestore,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
                   if (snapshot.data!.docs.isEmpty) {
-                    return SizedBox(
+                    return const SizedBox(
                       height: 500,
                       child: Center(
                         child: Text(
@@ -52,7 +51,7 @@ class CategoryProductList extends StatelessWidget {
                   }
                   return GridView.builder(
                     shrinkWrap: true,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2, childAspectRatio: 0.75),
                     itemCount: snapshot.data!.docs.length,
                     itemBuilder: (context, index) {

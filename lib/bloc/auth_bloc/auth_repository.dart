@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthRepository {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -29,32 +28,35 @@ class AuthRepository {
   // test..
   Future<bool> signIn({required String email, required String password}) async {
     try {
-      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+      final result = await auth.signInWithEmailAndPassword(
           email: email, password: password);
-      User user = userCredential.user!;
-      return true; // Sign-in successful
+      return true;
     } catch (e) {
-      print("Error signing in: $e");
-      return false; // Sign-in failed
+      return false;
     }
   }
 
   Future<void> signOut() async {
+    // await auth.currentUser?.delete();
     await auth.signOut();
   }
 
-  // Future<OAuthCredential> googleSignIn() async {
-  //   try {
-  //     print('hiiiiiiii');
-  //     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-  //     final GoogleSignInAuthentication? googleAuth =
-  //         await googleUser?.authentication;
-  //     final credential = GoogleAuthProvider.credential(
-  //         accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
-  //     await auth.signInWithCredential(credential);
-  //     return credential; // return the OAuthCredential
-  //   } catch (e) {
-  //     throw Exception(e.toString());
-  //   }
-  // }
+  Future<void> deleteUser() async {
+    await auth.currentUser?.delete();
+  }
+
+// Future<OAuthCredential> googleSignIn() async {
+//   try {
+//     print('hiiiiiiii');
+//     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+//     final GoogleSignInAuthentication? googleAuth =
+//         await googleUser?.authentication;
+//     final credential = GoogleAuthProvider.credential(
+//         accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+//     await auth.signInWithCredential(credential);
+//     return credential; // return the OAuthCredential
+//   } catch (e) {
+//     throw Exception(e.toString());
+//   }
+// }
 }

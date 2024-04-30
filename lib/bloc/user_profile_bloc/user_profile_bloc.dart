@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -31,12 +32,12 @@ class UserProfileBloc extends Bloc<UserProfileEvent, UserProfileState> {
         "last_name": event.lastName,
         "phone_number": event.number,
         "email": user!.email,
-        "gender": event.gender,
-        "date": {
-          "day": event.day,
-          "month": event.month,
-          "year": event.year,
-        }
+        // "gender": event.gender,
+        // "date": {
+        //   "day": event.day,
+        //   "month": event.month,
+        //   "year": event.year,
+        // }
       });
       emit(UserDetailAddedState());
     } catch (e) {

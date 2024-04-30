@@ -5,7 +5,7 @@ import '../../../../bloc/bnb_bloc/bottom_nav_bloc.dart';
 import 'bottom_nav_bar_page_refactor.dart';
 
 class BottomNavBarPage extends StatelessWidget {
-  BottomNavBarPage({super.key});
+  const BottomNavBarPage({super.key});
 
   Color backgroundColor() {
     Color color = Colors.white;
@@ -19,7 +19,7 @@ class BottomNavBarPage extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
             body: AnimatedSwitcher(
-              duration: Duration(milliseconds: 300),
+              duration: const Duration(milliseconds: 300),
               child: bottomNavScreen.elementAt(state.tabIndex),
             ),
             bottomNavigationBar: GNav(

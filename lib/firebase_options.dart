@@ -26,10 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -59,4 +56,16 @@ class DefaultFirebaseOptions {
     projectId: 'tuni-c0211',
     storageBucket: 'tuni-c0211.appspot.com',
   );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyCC_WDapJeA6Mo9nOWwWsS-QBWj9Cnv1fY',
+    appId: '1:682471459218:ios:d326271ed253432902994b',
+    messagingSenderId: '682471459218',
+    projectId: 'tuni-c0211',
+    databaseURL: 'https://tuni-c0211-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'tuni-c0211.appspot.com',
+    iosClientId: '682471459218-6rrhjekl4i7smqg2p5gv3vh9jfei515q.apps.googleusercontent.com',
+    iosBundleId: 'com.example.tuni',
+  );
+
 }

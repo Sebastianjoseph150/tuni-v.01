@@ -1,10 +1,14 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../drawer/drawer.dart';
-import 'home_refactor.dart';
+import 'package:flutter/widgets.dart';
+import 'package:tuni/screens/bottom_nav/pages/Home/platforms/andoid_home_refactor.dart';
+import 'package:tuni/screens/bottom_nav/pages/Home/platforms/ios_home_refactor.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -18,32 +22,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    return Scaffold(
-      drawer: DrawerWidget(),
-      body: NestedScrollView(
-        floatHeaderSlivers: true,
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return [
-            MainPageSliverAppBar(),
-          ];
-        },
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const MainPageCarouselSlider(),
-              const SizedBox(height: 35),
-              mainPageHeading('Explore'),
-              MainPageGridViewProductList(firestore: firestore),
-              const MainPageSeeMoreTextButton(),
-              const SizedBox(height: 30),
-              mainPageHeading('Filter by CATEGORY'),
-              MainPageFilterByCategory(
-                  screenWidth: screenWidth, screenHeight: screenHeight),
-              const Divider()
-            ],
-          ),
-        ),
-      ),
-    );
+    return Platform.isAndroid
+        ? AndroidHome(screenWidth: screenWidth, screenHeight: screenHeight)
+        : IosHome(screenWidth: screenWidth, screenHeight: screenHeight);
   }
 }
+
+
+

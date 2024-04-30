@@ -61,7 +61,7 @@ class CartRepository {
 
   Future<void> addCartItemCount(String itemId) async {
     final userId = user.uid;
-    DocumentReference firebaseCartCollection = await FirebaseFirestore.instance
+    DocumentReference firebaseCartCollection = FirebaseFirestore.instance
         .collection('users')
         .doc(userId)
         .collection('cartCollection')
@@ -75,7 +75,7 @@ class CartRepository {
 
   Future<void> lessCartItemCount(String itemId) async {
     final userId = user.uid;
-    DocumentReference firebaseCartCollection = await FirebaseFirestore.instance
+    DocumentReference firebaseCartCollection = FirebaseFirestore.instance
         .collection('users')
         .doc(userId)
         .collection('cartCollection')
@@ -161,11 +161,11 @@ class CartRepository {
     orderList.clear();
     orderMapList.clear();
 
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => BottomNavBarPage(),
-        ),
-        (route) => false);
+    // Navigator.pushAndRemoveUntil(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => const BottomNavBarPage(),
+    //     ),
+    //     (route) => false);
   }
 }

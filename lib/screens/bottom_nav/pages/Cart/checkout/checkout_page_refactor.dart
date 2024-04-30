@@ -85,15 +85,15 @@ class CheckoutPageTotalPayableView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             cartCheckoutSubHeadings(headingName: "TOTAL PAYABLE"),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('Total amount to pay: '),
+                const Text('Total amount to pay: '),
                 Text(
                   '₹${total.toString()}/-',
-                  style: TextStyle(
+                  style: const TextStyle(
                       letterSpacing: 1.5,
                       fontSize: 16,
                       fontWeight: FontWeight.w500),
@@ -136,16 +136,16 @@ class CheckOutPageAddressView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             cartCheckoutSubHeadings(headingName: 'ADDRESS'),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             richTextInCheckout(
                 content: 'House Name', text: address['houseName']),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             richTextInCheckout(
                 content: 'Place', text: address['city'] ?? ''),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             richTextInCheckout(
                 content: 'Landmark', text: address['landmark'] ?? ''),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             richTextInCheckout(
                 content: 'Pin code', text: address['pincode'] ?? ''),
           ],

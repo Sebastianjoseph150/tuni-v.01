@@ -1,7 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tuni/provider/Google_signin_provider.dart';
 import '../../../bloc/auth_bloc/auth_bloc.dart';
 import '../../bottom_nav/bottom_navigation_bar/pages/bottom_nav_bar_page.dart';
 import '../sign_up/refactor.dart';
@@ -20,21 +21,21 @@ class LoginBottomAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Not a member?"),
+          const Text("Not a member?"),
           TextButton(
               onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SignUpPage(),
+                      builder: (context) => const SignUpPage(),
                     ));
               },
-              child: Text(
+              style:
+                  TextButton.styleFrom(foregroundColor: Colors.grey.shade500),
+              child: const Text(
                 "Register Now",
                 style: TextStyle(color: Colors.blue),
-              ),
-              style:
-                  TextButton.styleFrom(foregroundColor: Colors.grey.shade500)),
+              )),
         ],
       ),
     );
@@ -68,14 +69,14 @@ class LoginCollectingEmailAndPassword extends StatelessWidget {
               showDialog(
                 context: context,
                 builder: (context) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 },
               );
             } else if (state is Authenticated) {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => BottomNavBarPage(),
+                    builder: (context) => const BottomNavBarPage(),
                   ),
                   (route) => false);
             } else if (state is AuthenticationError) {
@@ -83,14 +84,15 @@ class LoginCollectingEmailAndPassword extends StatelessWidget {
                 context: context,
                 builder: (context) {
                   return AlertDialog(
-                    title: Text('Sign In Failed'),
-                    content: Text("The provided credentials are incorrect."),
+                    title: const Text('Sign In Failed'),
+                    content:
+                        const Text("The provided credentials are incorrect."),
                     actions: [
                       TextButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('OK'),
+                        child: const Text('OK'),
                       ),
                     ],
                   );
@@ -109,7 +111,8 @@ class LoginCollectingEmailAndPassword extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              TextButton(onPressed: () {}, child: Text('Forgot Password?'))
+              TextButton(
+                  onPressed: () {}, child: const Text('Forgot Password?'))
             ],
           ),
         ),
@@ -122,63 +125,50 @@ class LoginCollectingEmailAndPassword extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => BottomNavBarPage(),
+                        builder: (context) => const BottomNavBarPage(),
                       ),
                       (route) => false);
                 }
               },
-              child:
-                  //  InkWell(
-                  //     onTap: () {
-                  //       context.read<AuthBloc>().add(GoogleIconClickedEvent());
-                  //     },
-                  //     child: Container(
-                  //         child:
-                  //     //     Image.asset(
-                  //     //   'asset/icons/google_icon.png',
-                  //     //   height: 40,
-                  //     // )
-                  //     )
-                  //     ),
-                  ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateColor.resolveWith(
-                              (states) => Colors.red)),
-                      onPressed: () {
-                        // String? uid =
-                        //     await GoogleSignInProvider().signInWithGoogle();
-                        // if (uid != null) {
-                        //   // Sign-in successful, handle navigation or other actions
-                        //   print('Signed in with UID: $uid');
-                        // } else {
-                        //   // Handle sign-in failure
-                        //   print('Sign-in failed.');
-                        // }
-                        // try {
-                        //   String? credential =
-                        //       await GoogleSignInProvider().signInWithGoogle();
-                        //   if (credential != null) {
-                        //     // Sign-in successful, handle navigation or other actions
-                        //     print('Signed in with credential: $credential');
-                        //     Navigator.pushReplacement(
-                        //         context,
-                        //         MaterialPageRoute(
-                        //             builder: (context) => BottomNavBarPage()));
-                        //   } else {
-                        //     // Handle sign-in failure
-                        //     print('Sign-in failed.');
-                        //   }
-                        // } catch (error) {
-                        //   // Handle any errors that occur during sign-in
-                        //   print('Error signing in: $error');
-                        // }
-                        context.read<AuthBloc>().add(SignInRequestEvent(
-                            email: 'guest@gmail.com', password: 'guest@123'));
-                      },
-                      child: Text(
-                        ' + Guest Account ',
-                        style: TextStyle(color: Colors.white),
-                      ))),
+              child: ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.red)),
+                  onPressed: () {
+                    // String? uid =
+                    //     await GoogleSignInProvider().signInWithGoogle();
+                    // if (uid != null) {
+                    //   // Sign-in successful, handle navigation or other actions
+                    //   print('Signed in with UID: $uid');
+                    // } else {
+                    //   // Handle sign-in failure
+                    //   print('Sign-in failed.');
+                    // }
+                    // try {
+                    //   String? credential =
+                    //       await GoogleSignInProvider().signInWithGoogle();
+                    //   if (credential != null) {
+                    //     // Sign-in successful, handle navigation or other actions
+                    //     print('Signed in with credential: $credential');
+                    //     Navigator.pushReplacement(
+                    //         context,
+                    //         MaterialPageRoute(
+                    //             builder: (context) => BottomNavBarPage()));
+                    //   } else {
+                    //     // Handle sign-in failure
+                    //     print('Sign-in failed.');
+                    //   }
+                    // } catch (error) {
+                    //   // Handle any errors that occur during sign-in
+                    //   print('Error signing in: $error');
+                    // }
+                    context.read<AuthBloc>().add(SignInRequestEvent(
+                        email: 'guest@gmail.com', password: 'guest@123'));
+                  },
+                  child: const Text(
+                    ' + Guest Account ',
+                    style: TextStyle(color: Colors.white),
+                  ))),
         )
       ],
     );
@@ -193,9 +183,19 @@ class LoginWelcomeMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
-      child: signInHeading(
-        'WELCOME!',
+      padding: const EdgeInsets.symmetric(horizontal: 0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          signInHeading(
+            'WELCOME!',
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            "Please login or signup to continue our app",
+            style: TextStyle(color: CupertinoColors.systemGrey),
+          )
+        ],
       ),
     );
   }
@@ -220,14 +220,14 @@ Widget authSignInButton(double screenWidth,
             context: context,
             builder: (context) {
               return AlertDialog(
-                title: Text('Empty Fields'),
-                content: Text("Mandatory fields can't be empty"),
+                title: const Text('Empty Fields'),
+                content: const Text("Mandatory fields can't be empty"),
                 actions: [
                   TextButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text('OK'),
+                    child: const Text('OK'),
                   ),
                 ],
               );
@@ -286,7 +286,7 @@ Widget authSignInButton(double screenWidth,
 Widget textFormField(String hintText, controller, double screenWidth) {
   return SizedBox(
     width: screenWidth * 0.75,
-    child: TextFormField(
+    child: Platform.isAndroid? TextFormField(
       validator: (value) {
         if (value == null || value.isEmpty) {
           return "Mandatory fields can't be empty";
@@ -307,16 +307,25 @@ Widget textFormField(String hintText, controller, double screenWidth) {
             borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(10)),
         hintText: hintText,
-        hintStyle: TextStyle(color: Colors.grey),
+        hintStyle: const TextStyle(color: Colors.grey),
       ),
-    ),
+    ) :
+    CupertinoTextField(
+      controller: controller,
+      obscureText: hintText == 'Password' || hintText == 'Confirm Password'
+          ? true
+          : false,
+      placeholder: hintText,
+    )
+    ,
+
   );
 }
 
 Widget signInHeading(String heading) {
   return Text(heading,
-      style: TextStyle(
-        fontSize: 25,
+      style: const TextStyle(
+        fontSize: 20,
         color: Colors.black,
         letterSpacing: 3,
         fontWeight: FontWeight.w700,
@@ -325,7 +334,7 @@ Widget signInHeading(String heading) {
 
 Widget signInTextQuote(String text) {
   return Text(text,
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 15,
         color: Colors.white,
         letterSpacing: 1,

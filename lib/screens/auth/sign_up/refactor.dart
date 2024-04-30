@@ -18,7 +18,7 @@ class SignUpBottomAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text("Already a member?"),
+          const Text("Already a member?"),
           TextButton(
               onPressed: () {
                 Navigator.push(
@@ -27,12 +27,12 @@ class SignUpBottomAppBar extends StatelessWidget {
                       builder: (context) => LogInPage(),
                     ));
               },
-              child: Text(
+              style:
+                  TextButton.styleFrom(foregroundColor: Colors.grey.shade500),
+              child: const Text(
                 "Login now",
                 style: TextStyle(color: Colors.blue),
-              ),
-              style:
-                  TextButton.styleFrom(foregroundColor: Colors.grey.shade500)),
+              )),
         ],
       ),
     );
@@ -86,7 +86,7 @@ class SignUpCollectingDetails extends StatelessWidget {
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => BottomNavBarPage(),
+                      builder: (context) => const BottomNavBarPage(),
                     ),
                     (route) => false);
               }
@@ -95,11 +95,10 @@ class SignUpCollectingDetails extends StatelessWidget {
                 onTap: () {
                   context.read<AuthBloc>().add(GoogleIconClickedEvent());
                 },
-                child: Container(
-                    child: Image.asset(
-                  'asset/icons/google_icon.png',
-                  height: 40,
-                ))),
+                child: Image.asset(
+                                  'asset/icons/google_icon.png',
+                                  height: 40,
+                                )),
           ),
         )
       ],
@@ -129,7 +128,7 @@ Widget authSignUpButton(double screenWidth,
           showDialog(
             context: context,
             builder: (context) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             },
@@ -140,7 +139,7 @@ Widget authSignUpButton(double screenWidth,
           Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(
-                builder: (context) => BottomNavBarPage(),
+                builder: (context) => const BottomNavBarPage(),
               ),
               (route) => false);
         }

@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tuni/bloc/favorite_bloc/favorite_repository.dart';
-import 'package:tuni/screens/bottom_nav/pages/Home/pages_in_home_page/category_product_list.dart';
 import 'package:tuni/screens/bottom_nav/pages/Home/pages_in_home_page/product_detail_page.dart';
 import 'package:tuni/screens/search/search_widget.dart';
 
@@ -12,38 +11,36 @@ import '../caterory/pages_in_categories/category_kids_page.dart';
 import '../caterory/pages_in_categories/category_men_page.dart';
 import '../caterory/pages_in_categories/category_women_page.dart';
 
-class MainPageSliverAppBar extends StatelessWidget {
-  final TextEditingController _searchController = TextEditingController();
 
-  MainPageSliverAppBar({
-    super.key,
-  });
+
+class MainPageSliverAppBar extends StatelessWidget {
+  const MainPageSliverAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
       foregroundColor: Colors.black,
       title: const Text(
-        'TUNI',
+        'TUNi',
         style: TextStyle(
-            letterSpacing: 8, fontSize: 30, fontWeight: FontWeight.w500),
+          letterSpacing: 8,
+          fontSize: 30,
+          fontWeight: FontWeight.w800,
+        ),
       ),
       actions: [
         IconButton(
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => SearchScreen()));
-              // SearchBar(
-              //   controller: _searchController,
-              //   onChanged: (value) {
-              //     // Perform search operation based on the value
-              //   },
-              // );
-            },
-            icon: const Icon(
-              Icons.search,
-              size: 35,
-            ))
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const SearchScreen()),
+            );
+          },
+          icon: const Icon(
+            Icons.search,
+            size: 35,
+          ),
+        ),
       ],
       floating: true,
       snap: true,
@@ -64,7 +61,7 @@ class MainPageFilterByCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
         width: screenWidth,
         height: screenHeight * .42,
         child: Row(
@@ -145,53 +142,131 @@ class MainPageSeeMoreTextButton extends StatelessWidget {
                 builder: (context) => AllCategory(),
               ));
         },
-        child: const Text('view all products'));
+        child: const Text(
+          'view all',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ));
   }
 }
 
 class MainPageGridViewProductList extends StatelessWidget {
   const MainPageGridViewProductList({
-    Key? key,
-    required this.firestore,
-  }) : super(key: key);
+    super.key,
+    // required this.firestore,
+  });
 
-  final Stream<QuerySnapshot<Map<String, dynamic>>> firestore;
+  // final Stream<QuerySnapshot<Map<String, dynamic>>> firestore;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: GridView(
+              semanticChildCount: 4,
+              gridDelegate:
+        const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              children: [
+      GridTile(
+          child: Container(
+        height: 180,
+        width: 160,
+        decoration: const BoxDecoration(
+            // color: Colors.red,
+            image: DecorationImage(
+                image: AssetImage("Assets/home_page/tshirt.png"))),
+      )),
+      GridTile(
+          child: Container(
+        height: 180,
+        width: 160,
+        decoration: const BoxDecoration(
+            // color: Colors.red,
+            image: DecorationImage(
+                image: AssetImage("Assets/home_page/tshirt.png"))),
+      )),
+      GridTile(
+          child: Container(
+        height: 180,
+        width: 160,
+        decoration: const BoxDecoration(
+            // color: Colors.red,
+            image: DecorationImage(
+                image: AssetImage("Assets/home_page/tshirt.png"))),
+      )),
+      GridTile(
+          child: Container(
+        height: 180,
+        width: 160,
+        decoration: const BoxDecoration(
+            // color: Colors.red,
+            image: DecorationImage(
+                image: AssetImage("Assets/home_page/tshirt.png"))),
+      )),
+              ],
+            ),
+    );
+  }
+}
+
+class MainPageProductsCarouselSlider extends StatelessWidget {
+  const MainPageProductsCarouselSlider({
+    super.key,
+    required this.firestore,
+  });
+
+  final Stream<QuerySnapshot<Map<String, dynamic>>> firestore;
+
+  @override
+  Widget build(BuildContext context) {
+    dynamic productId;
+    dynamic productName;
+    // dynamic productPrice;
+    dynamic imageUrlList;
+    dynamic color;
+    dynamic brand;
+    dynamic price;
+    dynamic gender;
+    dynamic category;
+    dynamic time;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
       child: SizedBox(
+        height: 300,
         child: StreamBuilder(
           stream: firestore,
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting)
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
+            }
 
             List<DocumentSnapshot> products = snapshot.data!.docs;
             products.shuffle();
 
-            return GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: .75, crossAxisCount: 2),
+            return CarouselSlider.builder(
               itemCount: products.length < 4 ? products.length : 4,
-              itemBuilder: (context, index) {
-                final productId = products[index]["id"];
-                final productName = products[index]["name"];
-                final productPrice = products[index]["price"];
-                final imageUrl = products[index]["imageUrl"][0];
-                final imageUrlList = products[index]["imageUrl"];
-                final color = products[index]["color"];
-                final brand = products[index]["brand"];
-                final price = products[index]["price"];
-                final gender = products[index]["gender"];
-                final category = products[index]["category"];
-                final time = products[index]["time"];
-                final List size = products[index]["size"];
+              options: CarouselOptions(
+                viewportFraction: .6,
+                autoPlay: false,
+                enlargeCenterPage: true,
+              ),
+              itemBuilder: (context, index, _) {
+                productId = products[index]["id"];
+                productName = products[index]["name"];
+                // productPrice = products[index]["price"];
+                imageUrlList = products[index]["imageUrl"];
+                color = products[index]["color"];
+                brand = products[index]["brand"];
+                price = products[index]["price"];
+                gender = products[index]["gender"];
+                category = products[index]["category"];
+                time = products[index]["time"];
+                List size = products[index]["size"];
                 return InkWell(
                   onTap: () {
                     Navigator.push(
@@ -212,17 +287,29 @@ class MainPageGridViewProductList extends StatelessWidget {
                       ),
                     );
                   },
-                  child: mainPageView(
-                    brand: brand,
-                    category: category,
-                    gender: gender,
-                    time: time,
-                    productId: productId,
-                    index: index,
-                    productName: productName,
-                    imageUrl: imageUrl,
-                    productPrice: productPrice,
+                  child: SizedBox(
+                    height: 450,
+                    width: 250,
+                    child: Row(
+                      children: [
+                        Image.network(
+                          imageUrlList[0],
+                          fit: BoxFit.fill,
+                        )
+                      ],
+                    ),
                   ),
+                  // mainPageView(
+                  //   brand: brand,
+                  //   category: category,
+                  //   gender: gender,
+                  //   time: time,
+                  //   productId: productId,
+                  //   index: index,
+                  //   productName: productName,
+                  //   imageUrl: imageUrlList[0],
+                  //   productPrice: productPrice,
+                  // ),
                 );
               },
             );
@@ -236,7 +323,11 @@ class MainPageGridViewProductList extends StatelessWidget {
 Widget mainPageHeading(String text) {
   return Text(
     text.toUpperCase(),
-    style: const TextStyle(fontSize: 20, letterSpacing: 3),
+    style: const TextStyle(
+      letterSpacing: 3,
+      fontSize: 15,
+      fontWeight: FontWeight.w500,
+    ),
   );
 }
 
@@ -292,8 +383,12 @@ Widget mainPageView(
         Stack(
           children: [
             Container(
-              height: 170,
+              // color: Colors.red,
+              height: 180,
               width: 160,
+              decoration: BoxDecoration(
+                  // color: Colors.amber,
+                  borderRadius: BorderRadius.circular(30)),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Image.network(
@@ -310,9 +405,6 @@ Widget mainPageView(
                   },
                 ),
               ),
-              decoration: BoxDecoration(
-                  // color: Colors.amber,
-                  borderRadius: BorderRadius.circular(30)),
             ),
           ],
         ),
@@ -330,7 +422,7 @@ Widget mainPageView(
                     overflow: TextOverflow.ellipsis,
                     style: customTextStyle()),
               ),
-              Text("₹${productPrice}/-", style: customTextStyle())
+              Text("₹$productPrice/-", style: customTextStyle())
             ],
           ),
         ),
@@ -340,69 +432,123 @@ Widget mainPageView(
 }
 
 class MainPageCarouselSlider extends StatelessWidget {
-  const MainPageCarouselSlider({Key? key}) : super(key: key);
+  const MainPageCarouselSlider({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: CarouselSlider(
-        items: [
-          {'imagePath': 'Assets/Images/BAnner_grande.webp', 'text': 'T-shirts'},
-          {'imagePath': 'Assets/Images/images.jpg', 'text': 'Shirts'},
-          {'imagePath': 'Assets/Images/BAnner_grande.webp', 'text': 'T-shirts'},
-        ].map((item) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Container(
-                width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
-                ),
-                child: InkWell(
-                  onTap: () {
-                    // Handle onTap action here
-                  },
-                  child: Stack(
-                    fit: StackFit.expand,
-                    children: [
-                      ClipRRect(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(20)),
-                        child: Image.asset(
-                          item['imagePath']!,
-                          fit: BoxFit.cover,
-                        ),
+    return CarouselSlider(
+      items: [
+        {'imagePath': 'Assets/Images/BAnner_grande.webp', 'text': 'T-shirts'},
+        {'imagePath': 'Assets/Images/images.jpg', 'text': 'Shirts'},
+        {'imagePath': 'Assets/Images/BAnner_grande.webp', 'text': 'T-shirts'},
+      ].map((item) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+              width: MediaQuery.of(context).size.width,
+              margin: const EdgeInsets.symmetric(horizontal: 5.0),
+              decoration: BoxDecoration(
+                color: Colors.grey.shade300,
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+              ),
+              child: InkWell(
+                onTap: () {},
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(20)),
+                      child: Image.asset(
+                        item['imagePath']!,
+                        fit: BoxFit.cover,
                       ),
-                      Positioned(
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          child: Center(
-                            child: Text(
-                              item['text']!,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 33,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 3,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                    // Positioned(
+                    //   child: Container(
+                    //     padding: const EdgeInsets.all(10),
+                    //     child: Center(
+                    //       child: Text(
+                    //         item['text']!,
+                    //         style: const TextStyle(
+                    //           color: Colors.white,
+                    //           fontSize: 33,
+                    //           fontWeight: FontWeight.bold,
+                    //           letterSpacing: 3,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
                 ),
-              );
-            },
-          );
-        }).toList(),
-        options: CarouselOptions(
-          autoPlay: true, // Enable auto play
-          // Add other options here
-        ),
+              ),
+            );
+          },
+        );
+      }).toList(),
+      options: CarouselOptions(autoPlay: true, viewportFraction: 1),
+    );
+  }
+}
+
+class ExploreItemsInHomePage extends StatelessWidget {
+  const ExploreItemsInHomePage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Stack(
+        children: [
+          // MainPageGridViewProductList(firestore: firestore),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: GridView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              gridDelegate:
+              const SliverGridDelegateWithFixedCrossAxisCount(
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 20,
+                crossAxisCount: 2,
+              ),
+              itemCount: 4,
+              itemBuilder: (context, index) {
+                List<String> images = [
+                  "Assets/home_page/tshirts.png",
+                  "Assets/home_page/jeans.png",
+                  "Assets/home_page/sweatshirts.png",
+                  "Assets/home_page/shirts.png",
+                ];
+                return GridTile(
+                    child: Container(
+                      height: 100,
+                      width: 100,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: Colors.red,
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage(images[index]))),
+                    ));
+              },
+            ),
+          ),
+          // Positioned(
+          //   top: 0,
+          //   child: Padding(
+          //     padding:
+          //     const EdgeInsets.symmetric(horizontal: 25.0),
+          //     child: SizedBox(
+          //       child:
+          //     ),
+          //   ),
+          // ),
+        ],
       ),
     );
   }
 }
+

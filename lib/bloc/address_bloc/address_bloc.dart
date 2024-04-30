@@ -1,10 +1,9 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../screens/drawer/pages_in_drawer/shipping_address/address_repository.dart';
 
@@ -26,14 +25,14 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
   FutureOr<void> onAddAddressEvent(OnAddAddressEvent event,
       Emitter<AddressState> emit) async {
     try {
-      final currentUser = await FirebaseAuth.instance.currentUser;
+      final currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser != null) {
         final userId = currentUser.uid;
         final String id = DateTime
             .now()
             .millisecondsSinceEpoch
             .toString();
-        CollectionReference collectionReference = await FirebaseFirestore
+        CollectionReference collectionReference = FirebaseFirestore
             .instance
             .collection('users')
             .doc(userId)
@@ -55,7 +54,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
   FutureOr<void> onEditAddressEvent(OnEditAddressEvent event,
       Emitter<AddressState> emit) async {
     try {
-      final currentUser = await FirebaseAuth.instance.currentUser;
+      final currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser != null) {
         final userId = currentUser.uid;
         await FirebaseFirestore.instance.collection('users').doc(userId)
@@ -84,7 +83,7 @@ class AddressBloc extends Bloc<AddressEvent, AddressState> {
           .delete();
       emit(AddressDeletedState());
     } catch (e) {
-
+      return;
     }
   }
 

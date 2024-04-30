@@ -41,10 +41,10 @@ class UserProfileElevatedButton extends StatelessWidget {
       height: 45,
       child: ElevatedButton(
         onPressed: () {},
-        child: Text("Add details"),
         style: ElevatedButton.styleFrom(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10))),
+        child: const Text("Add details"),
       ),
     );
   }
@@ -53,15 +53,15 @@ class UserProfileElevatedButton extends StatelessWidget {
 Text userDetailsDisplayingText(dynamic text) {
   return Text(
     text.toString(),
-    style: TextStyle(
-        fontSize: 15, letterSpacing: 2, fontWeight: FontWeight.w400),
+    style: const TextStyle(
+        fontSize: 25, letterSpacing: 2, fontWeight: FontWeight.w500),
   );
 }
 
 Text userDetailsHeadingText({required String text}) {
   return Text(
     text,
-    style: TextStyle(
+    style: const TextStyle(
       color: Colors.grey,
       letterSpacing: 2,
     ),

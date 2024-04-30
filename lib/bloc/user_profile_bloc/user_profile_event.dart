@@ -9,19 +9,19 @@ class OnAddUserDetailsEvent extends UserProfileEvent {
   final String firstName;
   final String lastName;
   final String number;
-  final String gender;
-  final int day;
-  final int month;
-  final int year;
+  // final String gender;
+  // final int day;
+  // final int month;
+  // final int year;
 
   OnAddUserDetailsEvent({
     required this.firstName,
     required this.number,
     required this.lastName,
-    required this.gender,
-    required this.day,
-    required this.month,
-    required this.year,
+    // required this.gender,
+    // required this.day,
+    // required this.month,
+    // required this.year,
   });
 }
 

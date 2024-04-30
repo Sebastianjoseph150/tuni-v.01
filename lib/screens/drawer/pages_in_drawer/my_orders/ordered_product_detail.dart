@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'my_orders_refactor.dart';
 
 class OrderedProductDetail extends StatelessWidget {

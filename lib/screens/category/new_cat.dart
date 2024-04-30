@@ -5,7 +5,7 @@ import 'package:tuni/screens/category/pages/cat3.dart';
 import 'package:tuni/screens/category/pages/cat4.dart';
 
 class CAt extends StatefulWidget {
-  const CAt({Key? key});
+  const CAt({super.key});
 
   @override
   _CAtState createState() => _CAtState();
@@ -18,7 +18,7 @@ class _CAtState extends State<CAt> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('men'),
+        title: const Text('men'),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
@@ -29,7 +29,7 @@ class _CAtState extends State<CAt> {
               children: [
                 Container(
                   width: constraints.maxWidth * 0.2, // 20% of screen width
-                  color: Color.fromARGB(255, 204, 203, 201),
+                  color: const Color.fromARGB(255, 204, 203, 201),
                   child: Column(
                     children: [
                       _buildCircleAvatarWithName(Icons.person, "T-shirt", 0),
@@ -39,7 +39,7 @@ class _CAtState extends State<CAt> {
                     ],
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: constraints.maxWidth * 0.8,
                   height: double.infinity,
                   child: Center(child: _getscreenForIndex(_selectedIndex)),
@@ -59,16 +59,16 @@ class _CAtState extends State<CAt> {
   ) {
     bool isSelected = index == _selectedIndex;
     return Padding(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       child: GestureDetector(
         onTap: () {
           setState(() {
-            _selectedIndex = index; // Update selected index
+            _selectedIndex = index;
           });
         },
         child: Column(
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 40,
               backgroundImage: NetworkImage(
                   'https://assets.ajio.com/medias/sys_master/root/20230615/Xs7z/648b116042f9e729d74492c4/-473Wx593H-466278337-white-MODEL.jpg'),
@@ -76,20 +76,20 @@ class _CAtState extends State<CAt> {
               // backgroundColor: isSelected
               //     ? Colors.grey
               //     : Colors
-              //         .transparent, // Set background color based on selection
+              //         .transparent,
             ),
-            SizedBox(
+            const SizedBox(
               height: 5,
-            ), // Add some spacing between the icon and the name
+            ),
             Text(
               name,
               style: TextStyle(
                 color: isSelected
                     ? Colors.grey
-                    : Colors.black, // Set text color based on selection
+                    : Colors.black,
                 fontWeight: isSelected
                     ? FontWeight.bold
-                    : FontWeight.normal, // Make text bold for selected item
+                    : FontWeight.normal,
               ),
             ),
           ],
@@ -102,15 +102,15 @@ class _CAtState extends State<CAt> {
     // Define colors based on index here
     switch (index) {
       case 0:
-        return Cat1();
+        return const Cat1();
       case 1:
-        return Cat2();
+        return const Cat2();
       case 2:
-        return Cat3();
+        return const Cat3();
       case 3:
-        return cat4();
+        return const Cat4();
       default:
-        return cat4(); // Default color
+        return const Cat4();
     }
   }
 }

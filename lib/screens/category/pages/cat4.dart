@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class cat4 extends StatelessWidget {
-  const cat4({super.key});
+class Cat4 extends StatelessWidget {
+  const Cat4({super.key});
 
   @override
   Widget build(BuildContext context) {

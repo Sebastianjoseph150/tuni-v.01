@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:tuni/model/product_model.dart';
 import 'package:tuni/screens/bottom_nav/pages/caterory/categories_refactor.dart';
 
 class Cat3 extends StatelessWidget {
-  Cat3({
-    Key? key,
-  }) : super(key: key);
+  const Cat3({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         // Provide constraints for the GridView.builder
-        constraints: BoxConstraints.expand(),
+        constraints: const BoxConstraints.expand(),
         child: GridView.builder(
           // Provide grid dimensions and spacing
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -23,7 +22,7 @@ class Cat3 extends StatelessWidget {
           ),
           itemBuilder: (BuildContext context, int index) {
             // Replace this with your custom item builder logic
-            return Container(
+            return SizedBox(
               // Provide dimensions for each grid item
               width: MediaQuery.of(context).size.width /
                   2, // Half of the screen width

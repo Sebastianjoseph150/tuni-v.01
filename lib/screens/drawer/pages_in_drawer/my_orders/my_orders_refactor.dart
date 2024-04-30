@@ -44,14 +44,14 @@ class OtherDetailsInOrderDetailPage extends StatelessWidget {
                     productName.toUpperCase(),
                     maxLines: 5,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 2),
                   ),
                   Text(
-                    '₹${price}/-',
-                    style: TextStyle(
+                    '₹$price/-',
+                    style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.w500,
                         letterSpacing: 2),
@@ -62,53 +62,51 @@ class OtherDetailsInOrderDetailPage extends StatelessWidget {
               AddressTextSpanOrderedDetailPage(
                   heading: "Ordered Quantity", text: quantity.toString()),
               SizedBox(height: screenHeight * .02),
-              Container(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Details: ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 1,
-                        fontSize: 18),
-                  ),
-                  SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(heading: "Name", text: name),
-                  SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(
-                      heading: "mobile", text: number),
-                  SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(
-                      heading: "email", text: email),
-                ],
-              )),
+              Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+              const Text(
+                "Details: ",
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 1,
+                    fontSize: 18),
+              ),
+              SizedBox(height: screenHeight * .01),
+              AddressTextSpanOrderedDetailPage(heading: "Name", text: name),
+              SizedBox(height: screenHeight * .01),
+              AddressTextSpanOrderedDetailPage(
+                  heading: "mobile", text: number),
+              SizedBox(height: screenHeight * .01),
+              AddressTextSpanOrderedDetailPage(
+                  heading: "email", text: email),
+                              ],
+                            ),
               SizedBox(height: screenHeight * .02),
-              Container(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Address: ",
-                    style: TextStyle(
-                        fontWeight: FontWeight.w500,
-                        letterSpacing: 1,
-                        fontSize: 18),
-                  ),
-                  SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(
-                      heading: "House Name", text: houseName),
-                  SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(
-                      heading: "City", text: place),
-                  SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(
-                      heading: "landmark", text: landmark),
-                  SizedBox(height: screenHeight * .01),
-                  AddressTextSpanOrderedDetailPage(
-                      heading: "pincode", text: pincode),
-                ],
-              )),
+              Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+              const Text(
+                "Address: ",
+                style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    letterSpacing: 1,
+                    fontSize: 18),
+              ),
+              SizedBox(height: screenHeight * .01),
+              AddressTextSpanOrderedDetailPage(
+                  heading: "House Name", text: houseName),
+              SizedBox(height: screenHeight * .01),
+              AddressTextSpanOrderedDetailPage(
+                  heading: "City", text: place),
+              SizedBox(height: screenHeight * .01),
+              AddressTextSpanOrderedDetailPage(
+                  heading: "landmark", text: landmark),
+              SizedBox(height: screenHeight * .01),
+              AddressTextSpanOrderedDetailPage(
+                  heading: "pincode", text: pincode),
+                              ],
+                            ),
             ],
           ),
         ),
@@ -135,7 +133,7 @@ class OrderedDetailPageCarouselSlider extends StatelessWidget {
         items: imageUrl.map((url) {
           return Builder(
             builder: (context) {
-              return Container(
+              return SizedBox(
                 height: screenHeight,
                 width: screenWidth,
                 child: Image.network(
@@ -145,7 +143,7 @@ class OrderedDetailPageCarouselSlider extends StatelessWidget {
                     if (loadingProgress == null) {
                       return child;
                     } else {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -175,11 +173,11 @@ class AddressTextSpanOrderedDetailPage extends StatelessWidget {
     return RichText(
         text: TextSpan(
             text: "$heading: ",
-            style: TextStyle(color: Colors.black, fontSize: 17),
+            style: const TextStyle(color: Colors.black, fontSize: 17),
             children: [
           TextSpan(
               text: text.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.black, fontSize: 17, letterSpacing: 1))
         ]));
   }

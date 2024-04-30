@@ -5,6 +5,8 @@ abstract class HomeEvent {}
 
 class OnLogoutEvent extends HomeEvent {}
 
+class OnDeleteUserEvent extends HomeEvent {}
+
 class OnAddCartButtonPressed extends HomeEvent {}
 
 class OnRemoveCartButtonPressed extends HomeEvent {}

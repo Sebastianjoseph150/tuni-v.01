@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuni/bloc/auth_bloc/auth_repository.dart';
 
 part 'auth_event.dart';
@@ -37,7 +37,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           event.password.isNotEmpty &&
           event.confirmPassword.isNotEmpty &&
           event.password == event.confirmPassword) {
-        emit(LoadingState());
+        // emit(LoadingState());
         await authRepository.signUp(
             name: event.name,
             email: event.email,

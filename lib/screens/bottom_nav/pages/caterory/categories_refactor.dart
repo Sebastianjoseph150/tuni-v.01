@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
+
 import '../Home/home_refactor.dart';
 
 Widget categoriesContainer(
     {required double screenWidth, required String text}) {
   return Container(
+    height: 60,
+    width: screenWidth,
+    decoration: BoxDecoration(
+        color: Colors.black87, borderRadius: BorderRadius.circular(20)),
     child: Center(
         child: Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
           color: Colors.white,
           fontSize: 20,
           fontWeight: FontWeight.bold,
           letterSpacing: 2),
     )),
-    height: 60,
-    width: screenWidth,
-    decoration: BoxDecoration(
-        color: Colors.black87, borderRadius: BorderRadius.circular(20)),
   );
 }
 
@@ -35,13 +36,16 @@ Widget productNameDisplay({required String text, required double size}) {
 
 Widget productView(String productName, String productPrice, String image) {
   return Padding(
-    padding: EdgeInsets.all(10),
+    padding: const EdgeInsets.all(10),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           height: 170,
           width: 160,
+          decoration: BoxDecoration(
+              // color: Colors.amber,
+              borderRadius: BorderRadius.circular(30)),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: Image.network(
@@ -51,24 +55,14 @@ Widget productView(String productName, String productPrice, String image) {
                 if (loadingProgress == null) {
                   return child;
                 } else {
-                  return Center(
-                    child: CircularProgressIndicator(),
+                  return const Center(
+                    // child: CircularProgressIndicator(),
                   );
                 }
               },
             ),
           ),
-          decoration: BoxDecoration(
-              // color: Colors.amber,
-              borderRadius: BorderRadius.circular(30)),
         ),
-        // Container(
-        //   width: 160,
-        //   height: 66,
-        //   padding:
-        //    EdgeInsets.all(10),
-        //   // color: Colors.red,
-        //   child:
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -76,7 +70,7 @@ Widget productView(String productName, String productPrice, String image) {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: customTextStyle()),
-            Text("₹${productPrice}/-", style: customTextStyle())
+            Text("₹$productPrice/-", style: customTextStyle())
           ],
         ),
         // ),
@@ -90,21 +84,39 @@ Widget categoriesItems(
     required double screenHeight,
     required BuildContext context,
     required className,
-    required String categoryName}) {
-  return SizedBox(
-      width: screenWidth,
-      height: screenHeight * .05,
-      child: ElevatedButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => className,
-              ));
-        },
-        child: Text(categoryName),
-        style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(Colors.blueGrey.shade600)),
-      ));
+    required String categoryName,
+    required String image,
+    Color? color}) {
+  return InkWell(
+    onTap: () {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => className,
+          ));
+    },
+    child: Stack(
+      children: [
+        Container(
+          width: screenWidth,
+          height: screenHeight * .17,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image:
+                  DecorationImage(fit: BoxFit.cover, image: AssetImage(image))),
+        ),
+        Positioned(
+            top: MediaQuery.of(context).size.height * .07,
+            left: 30,
+            child: Text(
+              categoryName,
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 2,
+                  color: Colors.black),
+            ))
+      ],
+    ),
+  );
 }

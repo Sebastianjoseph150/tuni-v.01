@@ -21,6 +21,7 @@ class DrawerWidget extends StatelessWidget {
     final String userEmail = user?.email ?? "";
 
     return Drawer(
+      backgroundColor: Colors.white,
       child: ListView(
         children: [
           UserAccountsDrawerHeader(
@@ -33,22 +34,22 @@ class DrawerWidget extends StatelessWidget {
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
                   return Text("Error: ${snapshot.error}");
                 }
                 if (!snapshot.hasData || !snapshot.data!.exists) {
-                  return Text(" ");
+                  return const Text(" ");
                 }
                 var name = " ";
                 if (snapshot.hasData && snapshot.data!.exists) {
                   var data = snapshot.data!.data() as Map<String, dynamic>;
-                  name = data["name"] ?? " ";
+                  name = data["first_name"] ?? " ";
                 }
 
                 return Text(
                   name,
-                  style: TextStyle(color: Colors.black, fontSize: 20),
+                  style: const TextStyle(color: Colors.black, fontSize: 20),
                 );
               },
             ),
@@ -64,7 +65,7 @@ class DrawerWidget extends StatelessWidget {
                   ));
             },
             child:
-                ListTile(leading: Icon(Icons.person), title: Text('Profile')),
+                const ListTile(leading: Icon(Icons.person), title: Text('Profile')),
           ),
           InkWell(
             onTap: () {
@@ -74,25 +75,25 @@ class DrawerWidget extends StatelessWidget {
                     builder: (context) => UserOrders(),
                   ));
             },
-            child: ListTile(
+            child: const ListTile(
                 leading: Icon(Icons.shopping_cart_sharp),
                 title: Text('My Orders')),
           ),
           InkWell(
               onTap: () {
                 Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => CAt()));
+                    context, MaterialPageRoute(builder: (context) => const CAt()));
               },
-              child: ListTile(
+              child: const ListTile(
                 leading: Icon(Icons.new_label),
                 title: Text('test'),
               )),
           InkWell(
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ShippingAddress()));
+                  MaterialPageRoute(builder: (context) => const ShippingAddress()));
             },
-            child: ListTile(
+            child: const ListTile(
                 leading: Icon(Icons.location_on_sharp),
                 title: Text('Shipping addresses')),
           ),
@@ -103,8 +104,8 @@ class DrawerWidget extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text('Leaving us?'),
-                      content: Text('Are you sure?  Do you want to Logout?'),
+                      title: const Text('Leaving us?'),
+                      content: const Text('Are you sure?  Do you want to Logout?'),
                       actions: [
                         TextButton(
                             onPressed: () {
@@ -121,7 +122,7 @@ class DrawerWidget extends StatelessWidget {
                                 (route) => false,
                               );
                             },
-                            child: Text(
+                            child: const Text(
                               'Yes',
                               style: TextStyle(color: Colors.red),
                             )),
@@ -135,7 +136,7 @@ class DrawerWidget extends StatelessWidget {
               onTap: () {
                 context.read<HomeBloc>().add(OnLogoutEvent());
               },
-              child: ListTile(
+              child: const ListTile(
                 leading: Icon(Icons.logout),
                 title: Text('Logout'),
               ),

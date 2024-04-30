@@ -9,7 +9,7 @@ import '../../../provider/category_provider.dart';
 class Cat1 extends StatelessWidget {
   final String category;
 
-  const Cat1({Key? key, this.category = "Tshirt"}) : super(key: key);
+  const Cat1({super.key, this.category = "Tshirt"});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class Cat1 extends StatelessWidget {
       future: _fetchProductsFromFirestore(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
         if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
@@ -37,7 +37,7 @@ class Cat1 extends StatelessWidget {
               width: mediaQuery.size.width,
               color: Colors.white,
               child: GridView.builder(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: _calculateCrossAxisCount(mediaQuery),
                   childAspectRatio: .72,
@@ -82,13 +82,16 @@ class Cat1 extends StatelessWidget {
 
   Widget productView(Product product) {
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             height: 139,
             width: 170,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+            ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
               child: Image.network(
@@ -98,15 +101,12 @@ class Cat1 extends StatelessWidget {
                   if (loadingProgress == null) {
                     return child;
                   } else {
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }
                 },
               ),
-            ),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
             ),
           ),
           Column(
@@ -116,11 +116,11 @@ class Cat1 extends StatelessWidget {
                 product.name.toUpperCase(),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               Text(
                 "₹${product.price}/-",
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               )
             ],
           ),

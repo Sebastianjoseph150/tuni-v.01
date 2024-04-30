@@ -1,8 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tuni/bloc/home_bloc/home_bloc_repository.dart';
 
 import '../auth_bloc/auth_repository.dart';
@@ -24,6 +23,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<OnAddCartButtonPressed>(onAddCartButtonPressed);
     on<OnRemoveCartButtonPressed>(onRemoveCartButtonPressed);
     on<OnAddedToCartButtonPressedEvent>(onAddedToCartButtonPressedEvent);
+    on<OnDeleteUserEvent>(onDeleteUserEvent);
   }
 
   FutureOr<void> onLogoutEvent(
@@ -34,6 +34,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(LoggedOutSuccessState());
     } catch (e) {
       emit(LoggedOutErrorState());
+      throw e.toString();
+    }
+  }
+
+  FutureOr<void> onDeleteUserEvent(
+      OnDeleteUserEvent event, Emitter<HomeState> emit) async {
+    try {
+      emit(LoadingState());
+      await auth.deleteUser();
+      emit(AccountDeletedState());
+    } catch (e) {
+      emit(AccountDeletionErrorState());
       throw e.toString();
     }
   }

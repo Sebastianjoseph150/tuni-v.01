@@ -1,15 +1,13 @@
 import 'dart:async';
+import 'dart:io';
 
-import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-// import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:tuni/bloc/cart_bloc/cart_repository.dart';
-import 'package:tuni/screens/drawer/pages_in_drawer/my_orders/user_orders.dart';
-
 import '../../../../../model/cart_model.dart';
 import '../../model/product_order_model.dart';
 import '../../screens/bottom_nav/bottom_navigation_bar/pages/bottom_nav_bar_page.dart';
@@ -22,7 +20,7 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   CartRepository cartRepository = CartRepository();
 
   final User? user = FirebaseAuth.instance.currentUser;
-  Razorpay _razorpay = Razorpay();
+  final Razorpay _razorpay = Razorpay();
 
   int totalAmount = 0;
 
@@ -107,7 +105,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       RazorPayEvent event, Emitter<CartState> emit) async {
     try {
       Map<String, dynamic> options = {
-        'key': 'rzp_test_TpsHVKhrkZuIUJ',
+        'key': "rzp_live_G0zIOHVwXX4lMK",
+        // 'rzp_test_TpsHVKhrkZuIUJ',
         // rzp_test_TpsHVKhrkZuIUJ
         //rzp_live_G0zIOHVwXX4lMK
         'amount': event.amount * 100,
@@ -128,33 +127,62 @@ class CartBloc extends Bloc<CartEvent, CartState> {
             address: event.address,
             mobile: event.mobile,
             orderList: event.orderList);
-        Navigator.pushReplacement(event.context,
-            MaterialPageRoute(builder: (context) => UserOrders()));
+        Platform.isAndroid
+            ? Navigator.pushReplacement(
+                event.context,
+                MaterialPageRoute(
+                    builder: (context) => const BottomNavBarPage()))
+            : Navigator.pushReplacement(
+                event.context,
+                CupertinoPageRoute(
+                  builder: (context) => const BottomNavBarPage(),
+                ));
       });
 
       _razorpay.on(Razorpay.EVENT_PAYMENT_ERROR,
           (PaymentFailureResponse response) {
-        Navigator.pushAndRemoveUntil(
-            event.context,
-            MaterialPageRoute(
-              builder: (context) => BottomNavBarPage(),
-            ),
-            (route) => false);
-        showDialog(
-          context: event.context,
-          builder: (context) {
-            return AlertDialog(
-              content: Text("Can't checkout, please try again!!"),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text("OK"))
-              ],
-            );
-          },
-        );
+        Platform.isAndroid
+            ? Navigator.pushReplacement(
+                event.context,
+                MaterialPageRoute(
+                    builder: (context) => const BottomNavBarPage()))
+            : Navigator.pushReplacement(
+                event.context,
+                CupertinoPageRoute(
+                  builder: (context) => const BottomNavBarPage(),
+                ));
+        Platform.isAndroid
+            ? showDialog(
+                context: event.context,
+                builder: (context) {
+                  return AlertDialog(
+                    content: const Text("Can't checkout, please try again!!"),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("OK"))
+                    ],
+                  );
+                },
+              )
+            : showCupertinoDialog(
+                context: event.context,
+                builder: (context) {
+                  return CupertinoAlertDialog(
+                    content: const Text("Can't checkout, please try again!!"),
+                    actions: [
+                      CupertinoButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text("OK"))
+                    ],
+                  );
+                },
+              );
       });
 
       _razorpay.on(

@@ -12,7 +12,7 @@ class RouteGenerator {
         return MaterialPageRoute(
             builder: (_) => BlocProvider<BottomNavBloc>.value(
                   value: bottomNavBloc,
-                  child: BottomNavBarPage(),
+                  child: const BottomNavBarPage(),
                 ));
 
       default:

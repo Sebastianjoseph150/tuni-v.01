@@ -11,6 +11,10 @@ class LoggedOutSuccessState extends HomeState {}
 
 class LoggedOutErrorState extends HomeState {}
 
+class AccountDeletedState extends HomeState {}
+
+class AccountDeletionErrorState extends HomeState {}
+
 
 
 class ItemCountAddedState extends HomeState {
